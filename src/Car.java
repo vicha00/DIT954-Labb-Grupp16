@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public abstract class Car implements Movable {
+public abstract class Car implements isCar, Movable {
 
     protected Point2D.Double position; // the position of the car
     protected double directionAngle; // the current angle of the car in space
