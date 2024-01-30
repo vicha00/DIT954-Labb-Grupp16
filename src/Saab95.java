@@ -3,7 +3,7 @@ import java.awt.geom.Point2D;
 
 public class Saab95 implements isVehicle, Movable {
 
-    private Vehicle car;
+    private final Vehicle car;
     private boolean turboOn;
 
     public Saab95() {
