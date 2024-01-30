@@ -3,14 +3,15 @@ import java.awt.geom.Point2D;
 
 public class Vehicle implements isVehicle, Movable {
 
-    protected Point2D.Double position; // the position of the car
-    protected double directionAngle; // the current angle of the car in space
-    protected double[] direction; // cos and sin of directionAngle (in that order)
-    protected int nrDoors; // Number of doors on the car
-    protected double enginePower; // Engine power of the car
-    protected double currentSpeed; // The current speed of the car
-    protected Color color; // Color of the car
-    protected String modelName; // The car model name
+    private Point2D.Double position; // the position of the car
+    private double directionAngle; // the current angle of the car in space
+    private double[] direction; // cos and sin of directionAngle (in that order)
+    private int nrDoors; // Number of doors on the car
+    private double enginePower; // Engine power of the car
+    private double currentSpeed; // The current speed of the car
+    private Color color; // Color of the car
+    private String modelName; // The car model name
+    private double speedFactor;
 
     public Vehicle(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;
@@ -20,6 +21,7 @@ public class Vehicle implements isVehicle, Movable {
         this.directionAngle = 0.0;
         this.direction = new double[] { Math.cos(directionAngle), Math.sin(directionAngle) };
         this.position = new Point2D.Double(0, 0);
+        setSpeedFactor(enginePower*0.01);
         stopEngine();
     }
     
@@ -27,7 +29,6 @@ public class Vehicle implements isVehicle, Movable {
     public String getModel() {
         return modelName;
     }
-
 
     @Override
     public int getNrDoors() {
@@ -63,17 +64,22 @@ public class Vehicle implements isVehicle, Movable {
     public void stopEngine() {
         currentSpeed = 0;
     }
+    
+    // @Override
+    public double getSpeedFactor() {
+        return speedFactor;
+    }
 
-    private double speedFactor() {
-        return enginePower*0.01;
-    };
+    public void setSpeedFactor(double speedFactor) {
+        this.speedFactor = speedFactor;
+    }
 
     private void incrementSpeed(double amount) {
-        setCurrentSpeed(getCurrentSpeed() + speedFactor() * amount);
+        setCurrentSpeed(getCurrentSpeed() + speedFactor * amount);
     }
 
     private void decrementSpeed(double amount) {
-        setCurrentSpeed(getCurrentSpeed() - speedFactor() * amount);
+        setCurrentSpeed(getCurrentSpeed() - speedFactor * amount);
     }
 
     private void setCurrentSpeed(double newSpeed) {
