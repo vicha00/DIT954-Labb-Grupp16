@@ -54,6 +54,11 @@ public class Scania implements IsVehicle, Movable, Tippable {
     }
 
     @Override
+    public boolean isEngineOn() {
+        return parent.isEngineOn();
+    }
+
+    @Override
     public void gas(double amount) {
         if(Math.abs(trailerAngle) <= 0.001) {
             parent.gas(amount);
@@ -71,13 +76,14 @@ public class Scania implements IsVehicle, Movable, Tippable {
     }
 
     @Override
-    public void turnLeft() {
-        parent.turnLeft();
+    public void turnLeft(double angle) {
+        parent.turnLeft(angle);
+
     }
 
     @Override
-    public void turnRight() {
-        parent.turnRight();
+    public void turnRight(double angle) {
+        parent.turnLeft(angle);
     }
 
     @Override
