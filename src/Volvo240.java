@@ -5,7 +5,7 @@ public class Volvo240 implements isVehicle, Movable {
 
     private final static double TRIMFACTOR = 1.25;
 
-    private Vehicle parent;
+    private final Vehicle parent;
 
     public Volvo240() {
         parent = new Vehicle(4, 100, Color.black, "Volvo240");
