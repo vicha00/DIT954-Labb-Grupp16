@@ -10,13 +10,19 @@
 
 ## 1: Extensibility
 
+### Part 1
+
 - bla
 
 ## 2: More Extensibility
 
+### Part 1
+
 - bla
 
 ## 3: Parametric Polymorphism
+
+### Part 1
 
 - bla
 
@@ -24,6 +30,25 @@
 
 ## 4: Even Further Extensibility
 
+### Part 1
+
 - bla
 
-## 5: 
+## 5: Abstraction
+
+### Part 1
+
+- bla
+
+## 6: Miscellaneous
+
+### Part 1
+
+- bla
+
+##
+
+### Presentation:
+
+- Put
+
