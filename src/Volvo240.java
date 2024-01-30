@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Volvo240 implements isCar {
+public class Volvo240 implements isVehicle {
 
     private final static double trimFactor = 1.25;
 

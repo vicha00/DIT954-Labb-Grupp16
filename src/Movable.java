@@ -1,3 +1,4 @@
+import java.awt.geom.Point2D;
 
 public interface Movable {
 
@@ -7,6 +8,7 @@ public interface Movable {
 
     void turnRight();
 
-    
+    double getDirection();
 
+    Point2D.Double getPosition();
 }
