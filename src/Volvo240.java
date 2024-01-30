@@ -5,87 +5,92 @@ public class Volvo240 implements isVehicle, Movable {
 
     private final static double TRIMFACTOR = 1.25;
 
-    private Vehicle car;
+    private Vehicle parent;
 
     public Volvo240() {
-        car = new Vehicle(4, 100, Color.black, "Volvo240");
-        car.setSpeedFactor(getEnginePower() * 0.01 * TRIMFACTOR);
+        parent = new Vehicle(4, 100, Color.black, "Volvo240");
+        parent.setSpeedFactor(getEnginePower() * 0.01 * TRIMFACTOR);
     }
 
 
     @Override
     public String getModel() {
-        return car.getModel();
+        return parent.getModel();
     }
 
     @Override
     public int getNrDoors() {
-        return car.getNrDoors();
+        return parent.getNrDoors();
     }
 
     @Override
     public double getEnginePower() {
-        return car.getEnginePower();
+        return parent.getEnginePower();
     }
 
     @Override
     public double getCurrentSpeed() {
-        return car.getCurrentSpeed();
+        return parent.getCurrentSpeed();
     }
 
     @Override
     public Color getColor() {
-        return car.getColor();
+        return parent.getColor();
     }
 
     @Override
     public void setColor(Color clr) {
-        car.setColor(clr);
+        parent.setColor(clr);
     }
 
     @Override
     public void startEngine() {
-        car.startEngine();
+        parent.startEngine();
     }
 
     @Override
     public void stopEngine() {
-        car.stopEngine();
+        parent.stopEngine();
+    }
+
+    @Override
+    public boolean isEngineOn() {
+        return parent.isEngineOn();
     }
 
     @Override
     public void gas(double amount) {
-        car.gas(amount);
+        parent.gas(amount);
     }
 
     @Override
     public void brake(double amount) {
-        car.brake(amount);
+        parent.brake(amount);
     }
 
     @Override
     public void move() {
-        car.move();
+        parent.move();
     }
 
     @Override
-    public void turnLeft() {
-        car.turnLeft();
+    public void turnLeft(double angle) {
+        parent.turnLeft(angle);
     }
 
     @Override
-    public void turnRight() {
-        car.turnRight();
+    public void turnRight(double angle) {
+        parent.turnRight(angle);
     }
 
     @Override
     public double getDirection() {
-        return car.getDirection();
+        return parent.getDirection();
     }
 
     @Override
     public Point2D.Double getPosition() {
-        return car.getPosition();
+        return parent.getPosition();
     }
 
 }

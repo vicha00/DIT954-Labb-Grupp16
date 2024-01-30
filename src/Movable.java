@@ -4,9 +4,9 @@ public interface Movable {
 
     void move();
 
-    void turnLeft();
+    void turnLeft(double angle);
 
-    void turnRight();
+    void turnRight(double angle);
 
     double getDirection();
 

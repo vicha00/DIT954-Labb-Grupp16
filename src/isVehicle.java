@@ -18,6 +18,8 @@ public interface isVehicle {
 
     void stopEngine();
 
+    boolean isEngineOn();
+
     void gas(double amount);
 
     void brake(double amount);

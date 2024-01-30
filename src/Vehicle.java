@@ -12,19 +12,21 @@ public class Vehicle implements isVehicle, Movable {
     private Color color; // Color of the car
     private String modelName; // The car model name
     private double speedFactor;
+    private boolean engineOn;
 
     public Vehicle(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
+        this.currentSpeed = 0.0;
         this.color = color;
         this.modelName = modelName;
         this.directionAngle = 0.0;
         this.direction = new double[] { Math.cos(directionAngle), Math.sin(directionAngle) };
         this.position = new Point2D.Double(0, 0);
-        setSpeedFactor(enginePower*0.01);
+        setSpeedFactor(enginePower * 0.01);
         stopEngine();
     }
-    
+
     @Override
     public String getModel() {
         return modelName;
@@ -57,18 +59,22 @@ public class Vehicle implements isVehicle, Movable {
 
     @Override
     public void startEngine() {
-        currentSpeed = 0.1;
+        engineOn = true;
     }
 
     @Override
     public void stopEngine() {
-        currentSpeed = 0;
+        engineOn = false;
     }
-    
-    // @Override
-    public double getSpeedFactor() {
-        return speedFactor;
+
+    @Override
+    public boolean isEngineOn() {
+        return engineOn;
     }
+
+    // public double getSpeedFactor() {
+    // return speedFactor;
+    // }
 
     public void setSpeedFactor(double speedFactor) {
         this.speedFactor = speedFactor;
@@ -91,7 +97,9 @@ public class Vehicle implements isVehicle, Movable {
         if (amount < 0 || 1 < amount) {
             throw new IllegalArgumentException();
         }
-        incrementSpeed(amount);
+        if (engineOn) {
+            incrementSpeed(amount);
+        }
     }
 
     @Override
@@ -99,7 +107,9 @@ public class Vehicle implements isVehicle, Movable {
         if (amount < 0 || 1 < amount) {
             throw new IllegalArgumentException();
         }
-        decrementSpeed(amount);
+        if (engineOn) {
+            decrementSpeed(amount);
+        }
     }
 
     @Override
@@ -114,14 +124,14 @@ public class Vehicle implements isVehicle, Movable {
     }
 
     @Override
-    public void turnLeft() {
-        directionAngle++;
+    public void turnLeft(double angle) {
+        directionAngle += angle;
         direction = new double[] { Math.cos(directionAngle), Math.sin(directionAngle) };
     }
 
     @Override
-    public void turnRight() {
-        directionAngle--;
+    public void turnRight(double angle) {
+        directionAngle -= angle;
         direction = new double[] { Math.cos(directionAngle), Math.sin(directionAngle) };
     }
 
