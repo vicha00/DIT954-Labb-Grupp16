@@ -1,32 +1,16 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class Saab95 implements IsVehicle, Movable {
+public class Scania implements IsVehicle, Movable, Tippable {
 
     private final Vehicle parent;
-    private boolean turboOn;
+    private double trailerAngle;
+    private boolean storageOpen;
 
-    public Saab95() {
-        parent = new Vehicle(2, 125, Color.red,"Saab95");
-        turboOn = false;
-    }
-
-    public void setTurboOn() {
-        turboOn = true;
-        setSpeedFactor();
-    }
-
-    public void setTurboOff() {
-        turboOn = false;
-        setSpeedFactor();
-    }
-
-    private void setSpeedFactor() {
-        double turbo = 1;
-        if (turboOn) {
-            turbo = 1.3;
-        }
-        parent.setSpeedFactor(getEnginePower() * 0.01 * turbo);
+    public Scania() {
+        parent = new Vehicle(2, 200, Color.white, "Scania");
+        trailerAngle = 0.0;
+        storageOpen = false;
     }
 
     @Override
@@ -68,15 +52,12 @@ public class Saab95 implements IsVehicle, Movable {
     public void stopEngine() {
         parent.stopEngine();
     }
-    
-    @Override
-    public boolean isEngineOn() {
-        return parent.isEngineOn();
-    }
 
     @Override
     public void gas(double amount) {
-        parent.gas(amount);
+        if(Math.abs(trailerAngle) <= 0.001) {
+            parent.gas(amount);
+        }
     }
 
     @Override
@@ -90,13 +71,13 @@ public class Saab95 implements IsVehicle, Movable {
     }
 
     @Override
-    public void turnLeft(double angle) {
-        parent.turnLeft(angle);
+    public void turnLeft() {
+        parent.turnLeft();
     }
 
     @Override
-    public void turnRight(double angle) {
-        parent.turnRight(angle);
+    public void turnRight() {
+        parent.turnRight();
     }
 
     @Override
@@ -109,4 +90,34 @@ public class Saab95 implements IsVehicle, Movable {
         return parent.getPosition();
     }
 
+    @Override
+    public void openStorage() {
+        storageOpen = true;
+    }
+
+    @Override
+    public void closeStorage() {
+        storageOpen = false;
+    }
+
+    @Override
+    public double getStorageAngle() {
+        return this.trailerAngle;
+    }
+
+    private void setStorageAngle(double angle) {
+        this.trailerAngle = Math.clamp(angle, 0.0, 70.0);
+    }
+
+    @Override
+    public void lowerStorage(double angle) {
+        setStorageAngle(this.trailerAngle - angle);
+    }
+
+    @Override
+    public void raiseStorage(double angle) {
+        if(Math.abs(parent.getCurrentSpeed()) <= 0.001) {
+            setStorageAngle(this.trailerAngle + angle);
+        }
+    }
 }
