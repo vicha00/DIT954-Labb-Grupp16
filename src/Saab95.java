@@ -13,15 +13,15 @@ public class Saab95 implements isVehicle, Movable {
 
     public void setTurboOn() {
         turboOn = true;
-        speedFactor();
+        setSpeedFactor();
     }
 
     public void setTurboOff() {
         turboOn = false;
-        speedFactor();
+        setSpeedFactor();
     }
 
-    private void speedFactor() {
+    private void setSpeedFactor() {
         double turbo = 1;
         if (turboOn) {
             turbo = 1.3;
