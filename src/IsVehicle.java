@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public interface isVehicle {
+public interface IsVehicle {
 
     String getModel();
 
