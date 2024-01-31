@@ -104,6 +104,11 @@ public class TippableStorageVehicle implements IsVehicle, Tippable{
     }
 
     @Override
+    public boolean isStorageOpen() {
+        return parent.isStorageOpen();
+    }
+
+    @Override
     public double getStorageAngle() {
         return this.trailerAngle;
     }

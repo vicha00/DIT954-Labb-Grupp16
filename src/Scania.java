@@ -101,6 +101,11 @@ public class Scania implements IsVehicle, Tippable {
     }
 
     @Override
+    public boolean isStorageOpen() {
+        return parent.isStorageOpen();
+    }
+
+    @Override
     public double getStorageAngle() {
         return parent.getStorageAngle();
     }
