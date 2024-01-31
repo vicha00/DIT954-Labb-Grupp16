@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public interface IsVehicle {
+public interface IsVehicle extends Movable {
 
     String getModel();
 

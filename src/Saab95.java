@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class Saab95 implements IsVehicle, Movable {
+public class Saab95 implements IsVehicle {
 
     private final Vehicle parent;
     private boolean turboOn;

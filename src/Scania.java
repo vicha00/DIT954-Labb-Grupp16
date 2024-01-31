@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class Scania implements IsVehicle, Movable, Tippable {
+public class Scania implements IsVehicle, Tippable {
 
     private final Vehicle parent;
     private double trailerAngle;

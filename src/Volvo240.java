@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class Volvo240 implements IsVehicle, Movable {
+public class Volvo240 implements IsVehicle {
 
     private final static double TRIMFACTOR = 1.25;
 
