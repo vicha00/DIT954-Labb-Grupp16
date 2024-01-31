@@ -20,6 +20,6 @@ public class Saab95Test {
         testSaab.setTurboOn();
         testSaab.gas(1);
         double gasWithTurbo = testSaab.getCurrentSpeed();
-        assertTrue(gasWithTurbo > gasWoTurbo);
+        assertTrue(gasWithTurbo - gasWoTurbo > gasWoTurbo);
     }
 }
