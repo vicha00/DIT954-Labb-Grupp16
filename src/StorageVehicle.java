@@ -100,4 +100,9 @@ public class StorageVehicle implements IsVehicle, HasStorage {
     public void closeStorage() {
         storageOpen = false;
     }
+
+    @Override
+    public boolean isStorageOpen() {
+        return storageOpen;
+    }
 }
