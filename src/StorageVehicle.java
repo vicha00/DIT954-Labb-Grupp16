@@ -1,12 +1,15 @@
 import java.awt.Color;
 import java.awt.geom.Point2D;
+import java.util.AbstractCollection;
 
-public class StorageVehicle implements IsVehicle, HasStorage {
+public class StorageVehicle<T> implements IsVehicle, HasStorage<T> {
     private final Vehicle parent;
     private boolean storageOpen;
+    private final AbstractCollection<T> storage;
 
-    public StorageVehicle(int nrDoors, double enginePower, Color color, String modelName) {
+    public StorageVehicle(int nrDoors, double enginePower, Color color, String modelName, AbstractCollection<T> storage) {
         parent = new Vehicle(nrDoors, enginePower, color, modelName);
+        this.storage = storage;
         storageOpen = false;
     }
 

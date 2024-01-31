@@ -1,12 +1,13 @@
 import java.awt.Color;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 
-public class TippableStorageVehicle implements IsVehicle, Tippable{
-    private final StorageVehicle parent;
+public class TippableStorageVehicle<T> implements IsVehicle, Tippable{
+    private final StorageVehicle<T> parent;
     private double trailerAngle;
 
     public TippableStorageVehicle(int nrDoors, double enginePower, Color color, String modelName) {
-        parent = new StorageVehicle(nrDoors, enginePower, color, modelName);
+        parent = new StorageVehicle<T>(nrDoors, enginePower, color, modelName, new ArrayList<T>());
         trailerAngle = 0.0;
     }
 
