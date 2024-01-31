@@ -98,7 +98,7 @@ public class VehicleTest {
     @Test
     public void testStopEngine() {
         testVehicle.stopEngine();
-        assertEquals(0, testVehicle.getCurrentSpeed(), 0.01);
+        assertFalse(testVehicle.isEngineOn());
     }
 
     @Test

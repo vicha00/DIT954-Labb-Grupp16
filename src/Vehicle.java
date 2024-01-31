@@ -72,10 +72,6 @@ public class Vehicle implements IsVehicle {
         return engineOn;
     }
 
-    // public double getSpeedFactor() {
-    // return speedFactor;
-    // }
-
     public void setSpeedFactor(double speedFactor) {
         this.speedFactor = speedFactor;
     }
