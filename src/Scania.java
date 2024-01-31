@@ -3,14 +3,10 @@ import java.awt.geom.Point2D;
 
 public class Scania implements IsVehicle, Tippable {
 
-    private final Vehicle parent;
-    private double trailerAngle;
-    private boolean storageOpen;
+    private final TippableStorageVehicle parent;
 
     public Scania() {
-        parent = new Vehicle(2, 200, Color.white, "Scania");
-        trailerAngle = 0.0;
-        storageOpen = false;
+        parent = new TippableStorageVehicle(2, 200, Color.white, "Scania");
     }
 
     @Override
@@ -60,9 +56,7 @@ public class Scania implements IsVehicle, Tippable {
 
     @Override
     public void gas(double amount) {
-        if(Math.abs(trailerAngle) <= 0.001) {
-            parent.gas(amount);
-        }
+        parent.gas(amount);
     }
 
     @Override
@@ -98,32 +92,26 @@ public class Scania implements IsVehicle, Tippable {
 
     @Override
     public void openStorage() {
-        storageOpen = true;
+        parent.openStorage();
     }
 
     @Override
     public void closeStorage() {
-        storageOpen = false;
+        parent.closeStorage();
     }
 
     @Override
     public double getStorageAngle() {
-        return this.trailerAngle;
-    }
-
-    private void setStorageAngle(double angle) {
-        this.trailerAngle = Math.clamp(angle, 0.0, 70.0);
+        return parent.getStorageAngle();
     }
 
     @Override
     public void lowerStorage(double angle) {
-        setStorageAngle(this.trailerAngle - angle);
+        parent.lowerStorage(angle);
     }
 
     @Override
     public void raiseStorage(double angle) {
-        if(Math.abs(parent.getCurrentSpeed()) <= 0.001) {
-            setStorageAngle(this.trailerAngle + angle);
-        }
+        parent.raiseStorage(angle);
     }
 }

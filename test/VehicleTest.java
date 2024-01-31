@@ -30,6 +30,7 @@ public class VehicleTest {
 
     @Test
     public void testBrake() {
+        testVehicle.gas(1);
         double initSpeed = testVehicle.getCurrentSpeed();
         testVehicle.brake(0.5);
         assertTrue(initSpeed > testVehicle.getCurrentSpeed());
