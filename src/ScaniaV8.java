@@ -1,11 +1,11 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class Scania implements IsVehicle, Tippable {
+public class ScaniaV8 implements IsVehicle, Tippable {
 
     private final TippableStorageVehicle parent;
 
-    public Scania() {
+    public ScaniaV8() {
         parent = new TippableStorageVehicle(2, 200, Color.white, "Scania");
     }
 
