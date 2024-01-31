@@ -30,6 +30,7 @@ public class VehicleTest {
 
     @Test
     public void testBrake() {
+        testVehicle.gas(1);
         double initSpeed = testVehicle.getCurrentSpeed();
         testVehicle.brake(0.5);
         assertTrue(initSpeed > testVehicle.getCurrentSpeed());
@@ -77,6 +78,7 @@ public class VehicleTest {
     @Test
     public void testMove() {
         Point2D.Double initial = testVehicle.getPosition();
+        testVehicle.gas(1);
         testVehicle.move();
         assertNotEquals(initial, testVehicle.getPosition());
     }
@@ -90,7 +92,7 @@ public class VehicleTest {
 
     @Test
     public void testStartEngine() {
-        assertNotEquals(0, testVehicle.getCurrentSpeed(), 0.01);
+        assertTrue(testVehicle.isEngineOn());
     }
 
     @Test
