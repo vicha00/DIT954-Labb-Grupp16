@@ -105,4 +105,8 @@ public class StorageVehicle implements IsVehicle, HasStorage {
     public boolean isStorageOpen() {
         return storageOpen;
     }
+
+    public void setSpeedFactor(double amount) {
+        parent.setSpeedFactor(amount);
+    }
 }

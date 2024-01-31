@@ -129,4 +129,8 @@ public class TippableStorageVehicle implements IsVehicle, Tippable{
         }
     }
 
+    public void setSpeedFactor(double amount) {
+        parent.setSpeedFactor(amount);
+    }
+
 }
