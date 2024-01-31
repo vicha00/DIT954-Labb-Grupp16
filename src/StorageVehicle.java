@@ -1,12 +1,13 @@
-import java.awt.*;
+import java.awt.Color;
 import java.awt.geom.Point2D;
 
-public class Scania implements IsVehicle, Tippable {
+public class StorageVehicle implements IsVehicle, HasStorage {
+    private final Vehicle parent;
+    private boolean storageOpen;
 
-    private final TippableStorageVehicle parent;
-
-    public Scania() {
-        parent = new TippableStorageVehicle(2, 200, Color.white, "Scania");
+    public StorageVehicle(int nrDoors, double enginePower, Color color, String modelName) {
+        parent = new Vehicle(nrDoors, enginePower, color, modelName);
+        storageOpen = false;
     }
 
     @Override
@@ -92,26 +93,11 @@ public class Scania implements IsVehicle, Tippable {
 
     @Override
     public void openStorage() {
-        parent.openStorage();
+        storageOpen = true;
     }
 
     @Override
     public void closeStorage() {
-        parent.closeStorage();
-    }
-
-    @Override
-    public double getStorageAngle() {
-        return parent.getStorageAngle();
-    }
-
-    @Override
-    public void lowerStorage(double angle) {
-        parent.lowerStorage(angle);
-    }
-
-    @Override
-    public void raiseStorage(double angle) {
-        parent.raiseStorage(angle);
+        storageOpen = false;
     }
 }
