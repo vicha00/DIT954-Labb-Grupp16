@@ -4,11 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ScaniaTest {
-    Scania testScania;
+    ScaniaV8 testScania;
 
     @Before
     public void init() {
-        testScania = new Scania();
+        testScania = new ScaniaV8();
         testScania.startEngine();
     }
 

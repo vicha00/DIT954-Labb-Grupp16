@@ -1,13 +1,13 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class Scania implements IsVehicle, Tippable {
+public class ScaniaV8 implements IsVehicle, Tippable {
 
     private final Vehicle parent;
     private double trailerAngle;
     private boolean storageOpen;
 
-    public Scania() {
+    public ScaniaV8() {
         parent = new Vehicle(2, 200, Color.white, "Scania");
         trailerAngle = 0.0;
         storageOpen = false;
