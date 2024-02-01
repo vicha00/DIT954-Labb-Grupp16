@@ -1,12 +1,12 @@
 import java.awt.Color;
 import java.util.Stack;
 
-public class FixedTrailerVehicle extends Vehicle implements  HasStorage<Vehicle> {
-    // TODO : change vehicle to car
+public class FixedTrailerVehicle<T> extends Vehicle implements  HasStorage<T> {
+
 
     public FixedTrailerVehicle(int nrDoors, double enginePower, Color color, String modelName) {
         super(nrDoors, enginePower, color, modelName);
-        Stack<Vehicle> storage = new Stack<>();
+        Stack<T> storage = new Stack<>();
     }
 
     @Override
@@ -28,13 +28,13 @@ public class FixedTrailerVehicle extends Vehicle implements  HasStorage<Vehicle>
     }
 
     @Override
-    public void storeThing(Vehicle toStore) {
+    public void storeThing(T toStore) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'storeThing'");
     }
 
     @Override
-    public Vehicle removeThing() {
+    public T removeThing() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'removeThing'");
     }

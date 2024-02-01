@@ -4,11 +4,13 @@ import java.util.List;
 
 public class StorageVehicle<T> implements IsVehicle, HasStorage<T> {
     private final Vehicle parent;
+    private final Trailer parentTrailer;
     private boolean storageOpen;
     private final List<T> storage;
 
     public StorageVehicle(int nrDoors, double enginePower, Color color, String modelName, List<T> storage) {
         parent = new Vehicle(nrDoors, enginePower, color, modelName);
+        parentTrailer = new Trailer();
         this.storage = storage;
         storageOpen = false;
     }

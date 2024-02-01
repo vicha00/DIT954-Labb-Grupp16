@@ -105,6 +105,7 @@ public class TippableStorageVehicle<T> implements IsVehicle, Tippable<T>{
 
     @Override
     public boolean isStorageOpen() {
+        
     }
 
     @Override
