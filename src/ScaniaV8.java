@@ -4,11 +4,11 @@ import java.awt.geom.Point2D;
 public class ScaniaV8<T> implements IsVehicle, Tippable<T> {
 
     public static final double TOURQE_FACTOR = 0.35;
-    private final SemiTruck<T> parent;
+    private final NonFixedTrailerTruck<T> parent;
 
     public ScaniaV8() {
 
-        parent = new SemiTruck<T>(2, 200, Color.white, "ScaniaV8");
+        parent = new NonFixedTrailerTruck<T>(2, 200, Color.white, "ScaniaV8");
         parent.setSpeedFactor(getEnginePower() * TOURQE_FACTOR * 0.01);
     }
 

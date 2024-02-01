@@ -5,12 +5,12 @@ import org.junit.Test;
 
 import java.awt.*;
 
-public class SemiTruckTest<T>{
-    SemiTruck<T> testTSP;
+public class NonFixedTrailerTruckTest<T>{
+    NonFixedTrailerTruck<T> testTSP;
 
     @Before
     public void init() {
-        testTSP = new SemiTruck<T>(2, 200, Color.white, "Scania");
+        testTSP = new NonFixedTrailerTruck<T>(2, 200, Color.white, "Scania");
         testTSP.startEngine();
     }
 

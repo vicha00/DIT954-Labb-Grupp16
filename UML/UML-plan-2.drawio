@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-02-01T13:55:02.624Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0" etag="UIN8Knn_eGZODhWi5k69" version="23.0.2" type="device">
+<mxfile host="app.diagrams.net" modified="2024-02-01T14:39:50.761Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0" etag="ZkeqrqjFiqm-lICKnZkA" version="23.0.2" type="device">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1196" dy="715" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -90,12 +90,15 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="1KCT2nZTQpKCan8YGp3O-55" value="VolvoFL" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="332" y="695" width="140" height="68" as="geometry">
+          <mxGeometry x="332" y="695" width="140" height="98" as="geometry">
             <mxRectangle x="320" y="353" width="90" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="_7U5zjCwsV4HifF4RqIY-108" value="+ &lt;u&gt;TORQUE_FACTOR&lt;/u&gt; : int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="1KCT2nZTQpKCan8YGp3O-55">
+          <mxGeometry y="26" width="140" height="30" as="geometry" />
+        </mxCell>
         <mxCell id="1KCT2nZTQpKCan8YGp3O-70" value="Truck that carries cars, cant tip its trailer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="1KCT2nZTQpKCan8YGp3O-55" vertex="1">
-          <mxGeometry y="26" width="140" height="42" as="geometry" />
+          <mxGeometry y="56" width="140" height="42" as="geometry" />
         </mxCell>
         <mxCell id="1KCT2nZTQpKCan8YGp3O-62" value="NormalCar" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="68" y="383" width="154" height="106" as="geometry" />
@@ -141,7 +144,8 @@
             <mxPoint x="370" y="380" as="sourcePoint" />
             <mxPoint x="530" y="380" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="290" y="601" />
+              <mxPoint x="360" y="590" />
+              <mxPoint x="290" y="590" />
               <mxPoint x="290" y="470" />
             </Array>
           </mxGeometry>
@@ -155,7 +159,7 @@
         <mxCell id="_7U5zjCwsV4HifF4RqIY-9" value="&lt;div&gt;+ storeThings(T) : void (and so on)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="_7U5zjCwsV4HifF4RqIY-6">
           <mxGeometry y="26" width="140" height="41" as="geometry" />
         </mxCell>
-        <mxCell id="_7U5zjCwsV4HifF4RqIY-10" value="SemiTruck" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="_7U5zjCwsV4HifF4RqIY-10" value="NonFixedTrailerTruck" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="582.5" y="484" width="140" height="67" as="geometry" />
         </mxCell>
         <mxCell id="_7U5zjCwsV4HifF4RqIY-56" value="&lt;div&gt;+ storeThings(T) : void (and so on)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="_7U5zjCwsV4HifF4RqIY-10">

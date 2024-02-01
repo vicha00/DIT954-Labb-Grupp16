@@ -1,10 +1,10 @@
 import java.awt.Color;
 
-public class SemiTruck<T> extends Vehicle implements Tippable<T>{
+public class NonFixedTrailerTruck<T> extends Vehicle implements Tippable<T>{
     private Trailer<T> trailer;
     private double trailerAngle;
 
-    public SemiTruck(int nrDoors, double enginePower, Color color, String modelName) {
+    public NonFixedTrailerTruck(int nrDoors, double enginePower, Color color, String modelName) {
         super(nrDoors, enginePower, color, modelName);
         trailer = new Trailer<T>();
         trailerAngle = 0.0;
