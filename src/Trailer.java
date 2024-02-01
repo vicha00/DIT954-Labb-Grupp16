@@ -27,7 +27,7 @@ public class Trailer<T> implements HasStorage<T> {
 
     @Override
     public T removeThing() {
-        return storage.pop();
+        return storage.pollLast();
     }
 
     @Override
