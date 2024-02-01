@@ -1,12 +1,15 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.lang.invoke.LambdaMetafactory;
 
 public class ScaniaV8<T> implements IsVehicle, Tippable<T> {
 
-    private final TippableStorageVehicle<T> parent;
+    public static final double TOURQE_FACTOR = 0.35; // TODO implement a speed limit in parent
+    private final TippableStorageVehicle parent;
 
     public ScaniaV8() {
-        parent = new TippableStorageVehicle<T>(2, 200, Color.white, "Scania");
+        parent = new TippableStorageVehicle(2, 200, Color.white, "Scania");
+        parent.setSpeedFactor(getEnginePower() * TOURQE_FACTOR);
     }
 
     @Override

@@ -3,7 +3,7 @@ import static org.junit.Assert.assertNotEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ScaniaTest {
+public class ScaniaV8Test {
     ScaniaV8 testScania;
 
     @Before

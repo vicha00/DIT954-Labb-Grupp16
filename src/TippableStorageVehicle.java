@@ -128,6 +128,10 @@ public class TippableStorageVehicle<T> implements IsVehicle, Tippable<T>{
         }
     }
 
+    public void setSpeedFactor(double amount) {
+        parent.setSpeedFactor(amount);
+    }
+
     @Override
     public void storeThing(T toStore) {
     }

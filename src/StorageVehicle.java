@@ -109,6 +109,10 @@ public class StorageVehicle<T> implements IsVehicle, HasStorage<T> {
         return storageOpen;
     }
 
+    public void setSpeedFactor(double amount) {
+        parent.setSpeedFactor(amount);
+    }
+
     @Override
     public void storeThing(T toStore) {
         storage.add(toStore);
