@@ -5,10 +5,10 @@ public class Volvo240 implements IsVehicle {
 
     private final static double TRIMFACTOR = 1.25;
 
-    private final Vehicle parent;
+    private final NormalCar parent;
 
     public Volvo240() {
-        parent = new Vehicle(4, 100, Color.black, "Volvo240");
+        parent = new NormalCar(4, Color.black, "Volvo240");
         parent.setSpeedFactor(getEnginePower() * 0.01 * TRIMFACTOR);
     }
 
