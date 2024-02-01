@@ -1,13 +1,14 @@
 import java.awt.Color;
+import java.awt.List;
 import java.awt.geom.Point2D;
-import java.util.ArrayList;
+import java.util.Stack;
 
-public class TippableStorageVehicle<T> implements IsVehicle, Tippable{
-    private final StorageVehicle<T> parent;
+public class TippableStorageVehicle<T> implements IsVehicle, Tippable<T>{
+    private final Vehicle parent;
     private double trailerAngle;
 
     public TippableStorageVehicle(int nrDoors, double enginePower, Color color, String modelName) {
-        parent = new StorageVehicle<T>(nrDoors, enginePower, color, modelName, new ArrayList<T>());
+        parent = new Vehicle(nrDoors, enginePower, color, modelName);
         trailerAngle = 0.0;
     }
 
@@ -96,17 +97,14 @@ public class TippableStorageVehicle<T> implements IsVehicle, Tippable{
 
     @Override
     public void openStorage() {
-        parent.openStorage();
     }
 
     @Override
     public void closeStorage() {
-        parent.closeStorage();
     }
 
     @Override
     public boolean isStorageOpen() {
-        return parent.isStorageOpen();
     }
 
     @Override
@@ -128,6 +126,32 @@ public class TippableStorageVehicle<T> implements IsVehicle, Tippable{
         if(Math.abs(parent.getCurrentSpeed()) <= 0.001) {
             setStorageAngle(this.trailerAngle + angle);
         }
+    }
+
+    @Override
+    public void storeThing(T toStore) {
+    }
+
+    @Override
+    public T removeThing() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'removeThing'");
+    }
+
+    @Override
+    public int countThings() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'countThings'");
+    }
+
+    public Stack<T> getStorage(){
+        return (Stack<T>) parent.getStorage(); // source: trust me bro
+    }
+
+    @Override
+    public void emptyStorage() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'emptyStorage'");
     }
 
 }

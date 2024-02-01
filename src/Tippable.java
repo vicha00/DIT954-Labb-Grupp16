@@ -1,5 +1,6 @@
-public interface Tippable extends HasStorage {
+public interface Tippable<T> extends HasStorage<T> {
     public double getStorageAngle();
     public void lowerStorage(double angle);
     public void raiseStorage(double angle);
+    public void emptyStorage();
 }

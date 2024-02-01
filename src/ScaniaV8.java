@@ -1,12 +1,12 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class ScaniaV8 implements IsVehicle, Tippable {
+public class ScaniaV8<T> implements IsVehicle, Tippable<T> {
 
-    private final TippableStorageVehicle parent;
+    private final TippableStorageVehicle<T> parent;
 
     public ScaniaV8() {
-        parent = new TippableStorageVehicle(2, 200, Color.white, "Scania");
+        parent = new TippableStorageVehicle<T>(2, 200, Color.white, "Scania");
     }
 
     @Override
@@ -119,4 +119,23 @@ public class ScaniaV8 implements IsVehicle, Tippable {
     public void raiseStorage(double angle) {
         parent.raiseStorage(angle);
     }
+
+    @Override
+    public void storeThing(T toStore) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'storeThing'");
+    }
+
+    @Override
+    public T removeThing() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'removeThing'");
+    }
+
+    @Override
+    public int countThings() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'countThings'");
+    }
+
 }
