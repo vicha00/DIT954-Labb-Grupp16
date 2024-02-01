@@ -23,11 +23,16 @@ public class Trailer<T> implements HasStorage<T> {
 
     @Override
     public void storeThing(T toStore) {
-        storage.push(toStore);
+        if (storageOpen){
+            storage.push(toStore);
+        }
     }
 
     @Override
     public T removeThing() {
+        if (!storageOpen) {
+            throw new IllegalAccessError("No Storage Access: open storag before removing things");
+        }
         return storage.pollLast();
     }
 
@@ -39,4 +44,5 @@ public class Trailer<T> implements HasStorage<T> {
     public Deque<T> getStorage() {
         return storage;
     }
+
 }
