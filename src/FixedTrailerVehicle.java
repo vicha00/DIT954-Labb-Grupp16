@@ -1,12 +1,12 @@
 import java.awt.Color;
 import java.util.Stack;
 
-public class FixedTrailerVehicle extends Vehicle implements  HasStorage<Vehicle> {
+public class FixedTrailerVehicle extends Vehicle implements  HasStorage<T> {
     // TODO : change vehicle to car
 
     public FixedTrailerVehicle(int nrDoors, double enginePower, Color color, String modelName) {
         super(nrDoors, enginePower, color, modelName);
-        Stack<Vehicle> storage = new Stack<>();
+        Stack<T> storage = new Stack<>();
     }
 
     @Override
