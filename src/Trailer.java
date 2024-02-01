@@ -4,11 +4,6 @@ public class Trailer<T> implements HasStorage<T> {
     private boolean storageOpen;
     private Deque<T> storage;
 
-    Trailer(Deque<T> storage) {
-        closeStorage();
-        this.storage = storage;
-    }
-
     @Override
     public void openStorage() {
         storageOpen = true;
@@ -31,7 +26,7 @@ public class Trailer<T> implements HasStorage<T> {
 
     @Override
     public T removeThing() {
-        return storage.pop();
+        return storage.poll();
     }
 
     @Override

@@ -2,96 +2,96 @@ import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.util.*;
 
-public class StorageVehicle<T> implements IsVehicle, HasStorage<T> {
-    private final Vehicle parent;
+public class FixedTrailerTruck<T> extends Vehicle implements HasStorage<T>{
     private boolean storageOpen;
-    private final Stack<T> storage;
+    private final Trailer<T> trailer;
 
-    public StorageVehicle(int nrDoors, double enginePower, Color color, String modelName, List<T> storage) {
-        parent = new Vehicle(nrDoors, enginePower, color, modelName);
-        this.storage = storage;
+    public FixedTrailerTruck(double enginePower, Color color, String modelName) {
+        super(2, enginePower, color, modelName);
+        this.trailer = new Trailer<>();
         storageOpen = false;
     }
 
+
     @Override
     public String getModel() {
-        return parent.getModel();
+        return super.getModel();
     }
 
     @Override
     public int getNrDoors() {
-        return parent.getNrDoors();
+        return super.getNrDoors();
     }
 
     @Override
     public double getEnginePower() {
-        return parent.getEnginePower();
+        return super.getEnginePower();
     }
 
     @Override
     public double getCurrentSpeed() {
-        return parent.getCurrentSpeed();
+        return super.getCurrentSpeed();
     }
 
     @Override
     public Color getColor() {
-        return parent.getColor();
+        return super.getColor();
     }
 
     @Override
     public void setColor(Color clr) {
-        parent.setColor(clr);
+        super.setColor(clr);
     }
 
     @Override
     public void startEngine() {
-        parent.startEngine();
+        super.startEngine();
     }
 
     @Override
     public void stopEngine() {
-        parent.stopEngine();
+        super.stopEngine();
     }
 
     @Override
     public boolean isEngineOn() {
-        return parent.isEngineOn();
+        return super.isEngineOn();
     }
 
     @Override
     public void gas(double amount) {
-        parent.gas(amount);
+        super.gas(amount);
     }
 
     @Override
     public void brake(double amount) {
-        parent.brake(amount);
+        super.brake(amount);
     }
 
     @Override
     public void move() {
-        parent.move();
+        super.move();
     }
 
     @Override
     public void turnLeft(double angle) {
-        parent.turnLeft(angle);
+        super.turnLeft(angle);
 
     }
 
     @Override
     public void turnRight(double angle) {
-        parent.turnLeft(angle);
+        super.turnLeft(angle);
     }
 
     @Override
     public double getDirection() {
-        return parent.getDirection();
+        return super.getDirection();
     }
 
     @Override
     public Point2D.Double getPosition() {
-        return parent.getPosition();
+        return super.getPosition();
     }
 
     @Override
@@ -109,22 +109,23 @@ public class StorageVehicle<T> implements IsVehicle, HasStorage<T> {
         return storageOpen;
     }
 
-    public void setSpeedFactor(double amount) {
-        parent.setSpeedFactor(amount);
-    }
-
     @Override
     public void storeThing(T toStore) {
-        storage.add(toStore);
+        trailer.storeThing(toStore);
     }
 
     @Override
     public T removeThing() {
-        return storage.removeLast();
+        Deque<T> storage = trailer.getStorage();
+        return storage.pollFirst();
     }
 
     @Override
     public int countThings() {
-        return storage.size();
+        return trailer.countThings();
+    }
+
+    public void setSpeedFactor(double amount) {
+        super.setSpeedFactor(amount);
     }
 }

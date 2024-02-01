@@ -9,7 +9,7 @@ public class ScaniaV8<T> implements IsVehicle, Tippable<T> {
 
     public ScaniaV8() {
         parent = new SemiTruck(2, 200, Color.white, "Scania");
-        parent.setSpeedFactor(getEnginePower() * TOURQE_FACTOR);
+        parent.setSpeedFactor(getEnginePower() * TOURQE_FACTOR * 0.01);
     }
 
     @Override
