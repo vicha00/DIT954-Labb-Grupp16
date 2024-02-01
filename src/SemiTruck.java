@@ -1,13 +1,12 @@
 import java.awt.Color;
-import java.util.ArrayDeque;
 
 public class SemiTruck<T> extends Vehicle implements Tippable<T>{
-    private final Trailer<T> parent;
+    private Trailer<T> trailer;
     private double trailerAngle;
 
     public SemiTruck(int nrDoors, double enginePower, Color color, String modelName) {
         super(nrDoors, enginePower, color, modelName);
-        parent = new Trailer<T>(new ArrayDeque<T>());
+        trailer = new Trailer<T>();
         trailerAngle = 0.0;
     }
 
@@ -20,17 +19,17 @@ public class SemiTruck<T> extends Vehicle implements Tippable<T>{
 
     @Override
     public void openStorage() {
-        parent.openStorage();
+        trailer.openStorage();
     }
 
     @Override
     public void closeStorage() {
-        parent.closeStorage();
+        trailer.closeStorage();
     }
 
     @Override
     public boolean isStorageOpen() {
-        return parent.isStorageOpen();
+        return trailer.isStorageOpen();
     }
 
     @Override
@@ -56,22 +55,22 @@ public class SemiTruck<T> extends Vehicle implements Tippable<T>{
 
     @Override
     public void storeThing(T toStore) {
-        parent.storeThing(toStore);
+        trailer.storeThing(toStore);
     }
 
     @Override
     public T removeThing() {
-        return parent.removeThing();
+        return trailer.removeThing();
     }
 
     @Override
     public int countThings() {
-        return parent.countThings();
+        return trailer.countThings();
     }
 
     @Override
     public void emptyStorage() {
-        parent.emptyStorage();
+        trailer = new Trailer<>();
     }
 
 }
