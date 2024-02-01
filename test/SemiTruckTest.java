@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.awt.*;
 
-public class TippableStorageVehicleTest{
+public class SemiTruckTest{
     SemiTruck testTSP;
 
     @Before
