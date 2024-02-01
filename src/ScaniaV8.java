@@ -5,10 +5,10 @@ import java.lang.invoke.LambdaMetafactory;
 public class ScaniaV8<T> implements IsVehicle, Tippable<T> {
 
     public static final double TOURQE_FACTOR = 0.35; // TODO implement a speed limit in parent
-    private final TippableStorageVehicle parent;
+    private final SemiTruck parent;
 
     public ScaniaV8() {
-        parent = new TippableStorageVehicle(2, 200, Color.white, "Scania");
+        parent = new SemiTruck(2, 200, Color.white, "Scania");
         parent.setSpeedFactor(getEnginePower() * TOURQE_FACTOR);
     }
 
