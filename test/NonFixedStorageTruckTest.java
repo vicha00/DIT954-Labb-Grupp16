@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.awt.*;
 
-public class NonFixedTrailerTruckTest<T>{
+public class NonFixedStorageTruckTest<T>{
     NonFixedTrailerTruck<T> testTSP;
 
     @Before

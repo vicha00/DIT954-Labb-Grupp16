@@ -2,7 +2,7 @@ import org.junit.*;
 import java.awt.*;
 import static org.junit.Assert.*;
 
-public class FixedTrailerTruckTest {
+public class FixedStorageTruckTest {
 
     FixedTrailerTruck<NormalCar> testTruck;
     NormalCar dummy;
@@ -20,7 +20,7 @@ public class FixedTrailerTruckTest {
         testTruck.storeThing(dummy);
         assertEquals("Storage open add",1,testTruck.countThings());
         testTruck.closeStorage();
-        assertThrows(IllegalArgumentException.class, () -> {testTruck.removeThing();});
+        assertThrows(IllegalAccessError.class, () -> {testTruck.removeThing();});
         assertEquals("storage not open remove", 1, testTruck.countThings());
         testTruck.openStorage();
         NormalCar car = testTruck.removeThing();

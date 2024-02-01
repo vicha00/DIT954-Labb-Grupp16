@@ -1,12 +1,12 @@
 import java.awt.Color;
 
 public class NonFixedTrailerTruck<T> extends Vehicle implements Tippable<T>{
-    private Trailer<T> trailer;
+    private Storage<T> storage;
     private double trailerAngle;
 
     public NonFixedTrailerTruck(int nrDoors, double enginePower, Color color, String modelName) {
         super(nrDoors, enginePower, color, modelName);
-        trailer = new Trailer<T>();
+        storage = new Storage<T>();
         trailerAngle = 0.0;
     }
 
@@ -19,17 +19,17 @@ public class NonFixedTrailerTruck<T> extends Vehicle implements Tippable<T>{
 
     @Override
     public void openStorage() {
-        trailer.openStorage();
+        storage.openStorage();
     }
 
     @Override
     public void closeStorage() {
-        trailer.closeStorage();
+        storage.closeStorage();
     }
 
     @Override
     public boolean isStorageOpen() {
-        return trailer.isStorageOpen();
+        return storage.isStorageOpen();
     }
 
     @Override
@@ -55,22 +55,22 @@ public class NonFixedTrailerTruck<T> extends Vehicle implements Tippable<T>{
 
     @Override
     public void storeThing(T toStore) {
-        trailer.storeThing(toStore);
+        storage.storeThing(toStore);
     }
 
     @Override
     public T removeThing() {
-        return trailer.removeThing();
+        return storage.removeThing();
     }
 
     @Override
     public int countThings() {
-        return trailer.countThings();
+        return storage.countThings();
     }
 
     @Override
     public void emptyStorage() {
-        trailer = new Trailer<>();
+        storage = new Storage<>();
     }
 
 }

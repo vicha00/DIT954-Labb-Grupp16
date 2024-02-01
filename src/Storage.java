@@ -1,7 +1,7 @@
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class Trailer<T> implements HasStorage<T> {
+public class Storage<T> implements HasStorage<T> {
 
     private boolean storageOpen = false;
     private final Deque<T> storage = new ArrayDeque<>();
