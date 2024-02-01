@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.ArrayDeque;
 
 public class SemiTruck<T> extends Vehicle implements Tippable<T>{
     private final Trailer<T> parent;
@@ -6,7 +7,7 @@ public class SemiTruck<T> extends Vehicle implements Tippable<T>{
 
     public SemiTruck(int nrDoors, double enginePower, Color color, String modelName) {
         super(nrDoors, enginePower, color, modelName);
-        parent = new Trailer<>();
+        parent = new Trailer<T>(new ArrayDeque<T>());
         trailerAngle = 0.0;
     }
 
@@ -55,24 +56,22 @@ public class SemiTruck<T> extends Vehicle implements Tippable<T>{
 
     @Override
     public void storeThing(T toStore) {
+        parent.storeThing(toStore);
     }
 
     @Override
     public T removeThing() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeThing'");
+        return parent.removeThing();
     }
 
     @Override
     public int countThings() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'countThings'");
+        return parent.countThings();
     }
 
     @Override
     public void emptyStorage() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'emptyStorage'");
+        parent.emptyStorage();
     }
 
 }
