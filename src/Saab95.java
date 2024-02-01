@@ -3,11 +3,11 @@ import java.awt.geom.Point2D;
 
 public class Saab95 implements IsVehicle {
 
-    private final Vehicle parent;
+    private final NormalCar parent;
     private boolean turboOn;
 
     public Saab95() {
-        parent = new Vehicle(2, 125, Color.red,"Saab95");
+        parent = new NormalCar(125, Color.red,"Saab95");
         turboOn = false;
     }
 
