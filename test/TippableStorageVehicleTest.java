@@ -6,11 +6,11 @@ import org.junit.Test;
 import java.awt.*;
 
 public class TippableStorageVehicleTest{
-    TippableStorageVehicle testTSP;
+    SemiTruck testTSP;
 
     @Before
     public void init() {
-        testTSP = new TippableStorageVehicle(2, 200, Color.white, "Scania");
+        testTSP = new SemiTruck(2, 200, Color.white, "Scania");
         testTSP.startEngine();
     }
 
