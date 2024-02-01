@@ -1,14 +1,14 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.lang.invoke.LambdaMetafactory;
 
 public class ScaniaV8<T> implements IsVehicle, Tippable<T> {
 
-    public static final double TOURQE_FACTOR = 0.35; // TODO implement a speed limit in parent
-    private final SemiTruck parent;
+    public static final double TOURQE_FACTOR = 0.35;
+    private final SemiTruck<T> parent;
 
     public ScaniaV8() {
-        parent = new SemiTruck(2, 200, Color.white, "Scania");
+
+        parent = new SemiTruck<T>(2, 200, Color.white, "ScaniaV8");
         parent.setSpeedFactor(getEnginePower() * TOURQE_FACTOR * 0.01);
     }
 
@@ -125,20 +125,22 @@ public class ScaniaV8<T> implements IsVehicle, Tippable<T> {
 
     @Override
     public void storeThing(T toStore) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'storeThing'");
+        parent.storeThing(toStore);
     }
 
     @Override
     public T removeThing() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeThing'");
+        return parent.removeThing();
     }
 
     @Override
     public int countThings() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'countThings'");
+        return parent.countThings();
+    }
+
+    @Override
+    public void emptyStorage() {
+        parent.emptyStorage();
     }
 
 }

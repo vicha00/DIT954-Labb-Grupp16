@@ -1,12 +1,12 @@
 import java.awt.Color;
 
 public class SemiTruck<T> extends Vehicle implements Tippable<T>{
-    private final Trailer<T> parent;
+    private Trailer<T> trailer;
     private double trailerAngle;
 
     public SemiTruck(int nrDoors, double enginePower, Color color, String modelName) {
         super(nrDoors, enginePower, color, modelName);
-        parent = new Trailer<>();
+        trailer = new Trailer<T>();
         trailerAngle = 0.0;
     }
 
@@ -19,17 +19,17 @@ public class SemiTruck<T> extends Vehicle implements Tippable<T>{
 
     @Override
     public void openStorage() {
-        parent.openStorage();
+        trailer.openStorage();
     }
 
     @Override
     public void closeStorage() {
-        parent.closeStorage();
+        trailer.closeStorage();
     }
 
     @Override
     public boolean isStorageOpen() {
-        return parent.isStorageOpen();
+        return trailer.isStorageOpen();
     }
 
     @Override
@@ -55,24 +55,22 @@ public class SemiTruck<T> extends Vehicle implements Tippable<T>{
 
     @Override
     public void storeThing(T toStore) {
+        trailer.storeThing(toStore);
     }
 
     @Override
     public T removeThing() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeThing'");
+        return trailer.removeThing();
     }
 
     @Override
     public int countThings() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'countThings'");
+        return trailer.countThings();
     }
 
     @Override
     public void emptyStorage() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'emptyStorage'");
+        trailer = new Trailer<>();
     }
 
 }

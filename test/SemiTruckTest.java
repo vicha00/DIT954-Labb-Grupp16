@@ -5,12 +5,12 @@ import org.junit.Test;
 
 import java.awt.*;
 
-public class TippableStorageVehicleTest{
-    SemiTruck testTSP;
+public class SemiTruckTest<T>{
+    SemiTruck<T> testTSP;
 
     @Before
     public void init() {
-        testTSP = new SemiTruck(2, 200, Color.white, "Scania");
+        testTSP = new SemiTruck<T>(2, 200, Color.white, "Scania");
         testTSP.startEngine();
     }
 
