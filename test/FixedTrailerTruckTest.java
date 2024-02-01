@@ -20,11 +20,10 @@ public class FixedTrailerTruckTest {
         testTruck.storeThing(dummy);
         assertEquals("Storage open add",1,testTruck.countThings());
         testTruck.closeStorage();
-        NormalCar car = testTruck.removeThing();
+        assertThrows(IllegalArgumentException.class, () -> {testTruck.removeThing();});
         assertEquals("storage not open remove", 1, testTruck.countThings());
-        assertNull("storage not open remove",car);
         testTruck.openStorage();
-        car = testTruck.removeThing();
+        NormalCar car = testTruck.removeThing();
         assertEquals("storage open remove",0,testTruck.countThings());
         assertNotNull("storage open remove",car);
     }
