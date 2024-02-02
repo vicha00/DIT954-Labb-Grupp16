@@ -13,8 +13,8 @@ public class testMain {
         workshop.storeThing(saab);
         workshop.storeThing(volvoTruck);
         workshop.storeThing(volvo);
-        //volvo240Workshop.storeThing(saab);
-        //volvo240Workshop.storeThing(volvoTruck);
+        volvo240Workshop.storeThing(saab);
+        volvo240Workshop.storeThing(volvoTruck);
         volvo240Workshop.storeThing(volvo);
     }
 }

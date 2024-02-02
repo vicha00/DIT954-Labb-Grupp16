@@ -17,7 +17,7 @@ public class VolvoFL extends Truck<NormalCar> {
         if(!closeEnough) {
             return;
         }
-        thing.setPosition(getPositionRef());
+        thing.setPosition(this.getPositionRef());
         super.storeThing(thing);
     }
 

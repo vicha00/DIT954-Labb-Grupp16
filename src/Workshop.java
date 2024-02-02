@@ -7,13 +7,13 @@ public class Workshop<T extends GroundVehicle> implements HasStorage<T> {
     @Override
     public void openStorage() {
         garage.openStorage();
-        System.out.println("Were open!!!");
+        System.out.println("We're open!!!");
     }
 
     @Override
     public void closeStorage() {
         garage.closeStorage();
-        System.out.println("Were closed.");
+        System.out.println("We're closed.");
     }
 
     @Override
