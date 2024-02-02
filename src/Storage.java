@@ -30,7 +30,7 @@ public abstract class Storage<T> implements HasStorage<T> {
     @Override
     public T removeThing() {
         if (!isStorageOpen()) {
-            throw new IllegalAccessError("Cant remove a thing from a closed storage");
+            throw new IllegalAccessError("Can't remove a thing from a closed storage");
         }
         return storage.removeFirst();
     }
