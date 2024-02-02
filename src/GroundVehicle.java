@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class Vehicle implements IsVehicle {
+public class GroundVehicle implements IsVehicle {
 
     private Point2D.Double position; // the position of the car
     private double directionAngle; // the current angle of the car in space
@@ -11,10 +11,9 @@ public class Vehicle implements IsVehicle {
     private double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private final String modelName; // The car model name
-    private double speedFactor;
     private boolean engineOn;
 
-    public Vehicle(int nrDoors, double enginePower, Color color, String modelName) {
+    public GroundVehicle(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.currentSpeed = 0.0;
@@ -23,7 +22,6 @@ public class Vehicle implements IsVehicle {
         this.directionAngle = 0.0;
         this.direction = new double[] { Math.cos(directionAngle), Math.sin(directionAngle) };
         this.position = new Point2D.Double(0, 0);
-        setSpeedFactor(enginePower * 0.01);
         stopEngine();
     }
 
@@ -72,16 +70,14 @@ public class Vehicle implements IsVehicle {
         return engineOn;
     }
 
-    public void setSpeedFactor(double speedFactor) {
-        this.speedFactor = speedFactor;
-    }
+    public double speedFactor() {return enginePower * 0.01; }
 
     private void incrementSpeed(double amount) {
-        setCurrentSpeed(getCurrentSpeed() + speedFactor * amount);
+        setCurrentSpeed(getCurrentSpeed() + speedFactor() * amount);
     }
 
     private void decrementSpeed(double amount) {
-        setCurrentSpeed(getCurrentSpeed() - speedFactor * amount);
+        setCurrentSpeed(getCurrentSpeed() - speedFactor() * amount);
     }
 
     private void setCurrentSpeed(double newSpeed) {

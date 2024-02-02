@@ -1,6 +1,6 @@
 import java.awt.Color;
 
-public class NonFixedTrailerTruck<T> extends Vehicle implements Tippable<T>{
+public class NonFixedTrailerTruck<T> extends GroundVehicle implements Tippable<T>{
     private Storage<T> storage;
     private double trailerAngle;
 
