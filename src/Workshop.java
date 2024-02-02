@@ -1,8 +1,8 @@
 public class Workshop<T extends IsVehicle> implements HasStorage<T> {
 
-    private final Storage<T> vehicles;
+    private final Trailer<T> vehicles;
     Workshop() {
-        vehicles = new Storage<>();
+        vehicles = new Trailer<>();
     }
 
     @Override

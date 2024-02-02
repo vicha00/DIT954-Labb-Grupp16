@@ -3,41 +3,41 @@ import java.awt.Color;
 public class Truck<T> extends GroundVehicle implements HasStorage<T> {
 
     public static final double TOURQUE_FACTOR = 0.35;
-    private final Storage<T> storage;
+    private final Trailer<T> trailer;
 
     public Truck(double enginePower, Color color, String modelName) {
         super(2, enginePower, color, modelName);
-        this.storage = new Storage<>();
+        this.trailer = new Trailer<>();
     }
 
     @Override
     public void openStorage() {
-        storage.openStorage();
+        trailer.openStorage();
     }
 
     @Override
     public void closeStorage() {
-        storage.closeStorage();
+        trailer.closeStorage();
     }
 
     @Override
     public boolean isStorageOpen() {
-        return storage.isStorageOpen();
+        return trailer.isStorageOpen();
     }
 
     @Override
     public void storeThing(T toStore) {
-        storage.storeThing(toStore);
+        trailer.storeThing(toStore);
     }
 
     @Override
     public T removeThing() {
-        return storage.removeThing();
+        return trailer.removeThing();
     }
 
     @Override
     public int countThings() {
-        return storage.countThings();
+        return trailer.countThings();
     }
 
     @Override

@@ -1,6 +1,6 @@
 import java.util.Stack;
 
-public class Storage<T> implements HasStorage<T> {
+public class Trailer<T> implements HasStorage<T> {
 
     private boolean storageOpen = false;
     private final Stack<T> storage = new Stack<>();
