@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.util.*;
 
 public class Truck<T> extends GroundVehicle implements HasStorage<T> {
+
+    public static final double TOURQUE_FACTOR = 0.35;
     private final Storage<T> storage;
 
     public Truck(double enginePower, Color color, String modelName) {
@@ -26,15 +28,17 @@ public class Truck<T> extends GroundVehicle implements HasStorage<T> {
 
     @Override
     public T removeThing() {
-        if (!storage.isStorageOpen()) {
-            throw new IllegalAccessError("No Storage Access: open storage before removing things");
-        }
-        Deque<T> storage = this.storage.getStorage();
-        return storage.pollFirst();
+        return storage.removeThing();
     }
 
     @Override
     public int countThings() {
         return storage.countThings();
     }
+
+    @Override
+    public double speedFactor() {
+        return super.speedFactor() * TOURQUE_FACTOR;
+    }
+
 }
