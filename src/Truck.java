@@ -5,9 +5,9 @@ public class Truck<T> extends GroundVehicle implements HasStorage<T> {
     public static final double TOURQUE_FACTOR = 0.35;
     private final Trailer<T> storage;
 
-    public Truck(double enginePower, Color color, String modelName) {
+    public Truck(double enginePower, Color color, String modelName, int max_capacity) {
         super(2, enginePower, color, modelName);
-        this.storage = new Trailer<>(10);
+        this.storage = new Trailer<>(max_capacity);
     }
 
     @Override

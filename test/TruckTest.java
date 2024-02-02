@@ -11,7 +11,7 @@ public class TruckTest {
     private Truck<Integer> testTruck;
     @Before
     public void init() {
-        testTruck =  new Truck<>(1,Color.GREEN,"dummy");
+        testTruck =  new Truck<>(1,Color.GREEN,"dummy", 10);
     }
 
     @Test
