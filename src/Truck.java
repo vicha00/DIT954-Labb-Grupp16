@@ -38,9 +38,6 @@ public class Truck<T> extends GroundVehicle implements HasStorage<T> {
 
     @Override
     public T removeThing() {
-        if(!storage.isStorageOpen()) {
-            throw new IllegalAccessError("Cant remove a thing from a closed trailer");
-        }
         return storage.removeThing();
     }
 

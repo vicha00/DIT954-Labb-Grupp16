@@ -5,7 +5,7 @@ public class VolvoFL extends Truck<NormalCar> {
 
     public static final int MAX_LOAD = 10;
     public VolvoFL() {
-        super(200, Color.BLUE, "VolvoFL");
+        super(200, Color.BLUE, "VolvoFL", MAX_LOAD);
     }
 
 
