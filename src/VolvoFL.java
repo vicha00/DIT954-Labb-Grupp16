@@ -8,9 +8,14 @@ public class VolvoFL extends Truck<NormalCar> {
         super(200, Color.BLUE, "VolvoFL");
     }
 
+
+    private boolean closeEnough(Point2D.Double p) {
+        return  1 >= p.distance(this.getPosition());
+    }
     @Override
     public void storeThing(NormalCar thing) {
-        if(countThings() >= MAX_LOAD) {
+        boolean closeEnough = closeEnough(thing.getPosition());
+        if(countThings() >= MAX_LOAD && !closeEnough) {
             return;
         }
         thing.setPosition(getPositionRef());
