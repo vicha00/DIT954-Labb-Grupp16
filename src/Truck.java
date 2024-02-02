@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.util.*;
 
 public class Truck<T> extends GroundVehicle implements HasStorage<T> {
 
@@ -10,11 +9,16 @@ public class Truck<T> extends GroundVehicle implements HasStorage<T> {
         super(2, enginePower, color, modelName);
         this.storage = new Storage<>();
     }
-    @Override
-    public void openStorage() {storage.openStorage();}
 
     @Override
-    public void closeStorage() {storage.closeStorage();}
+    public void openStorage() {
+        storage.openStorage();
+    }
+
+    @Override
+    public void closeStorage() {
+        storage.closeStorage();
+    }
 
     @Override
     public boolean isStorageOpen() {

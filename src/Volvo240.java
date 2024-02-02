@@ -1,13 +1,11 @@
 import java.awt.*;
-import java.awt.geom.Point2D;
 
 public class Volvo240 extends NormalCar {
 
     private final static double TRIMFACTOR = 1.25;
 
-
     public Volvo240() {
-        super(2,100, Color.black, "Volvo240");
+        super(2, 100, Color.black, "Volvo240");
     }
 
     @Override
