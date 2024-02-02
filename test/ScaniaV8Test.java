@@ -1,25 +1,21 @@
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.*;
 
-import java.awt.*;
+public class ScaniaV8Test {
 
-public class NonFixedStorageTruckTest<T>{
-    NonFixedTrailerTruck<T> testTSP;
+    ScaniaV8<Object> testTSP;
 
     @Before
     public void init() {
-        testTSP = new NonFixedTrailerTruck<T>(2, 200, Color.white, "Scania");
-        testTSP.startEngine();
+        this.testTSP = new ScaniaV8<>();
+        this.testTSP.startEngine();
     }
 
-    @Test
+     @Test
     public void lowerAndHeightenStorage() {
         testTSP.raiseStorage(70);
         testTSP.lowerStorage(35);
         assertEquals(35, testTSP.getStorageAngle(), 0.01);
-        testTSP.gas(1);
         testTSP.lowerStorage(35);
         assertNotEquals(35, testTSP.getStorageAngle(), 0.01);
         testTSP.lowerStorage(80);
@@ -42,6 +38,3 @@ public class NonFixedStorageTruckTest<T>{
         assertEquals(0, testTSP.getCurrentSpeed(), 0.01);
     }
 }
-
-
-

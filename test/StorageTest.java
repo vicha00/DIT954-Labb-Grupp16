@@ -32,7 +32,7 @@ public class StorageTest {
         testStorage.storeThing(3);
         assertEquals(testStorage.countThings(), 3);
         Integer removed = testStorage.removeThing();
-        assertFalse(testStorage.getStorage().contains(removed));
+        assertEquals(3, (long) removed);
         assertEquals(testStorage.countThings(), 2);
         assertEquals(testStorage.removeThing(), (Integer) 2);
 

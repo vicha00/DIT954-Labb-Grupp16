@@ -5,7 +5,7 @@
 - make UML diagram
 - convert from inheritance to composition
 - write or rewrite JUnit tests
-- make interface IsVehicle and class Vehicle
+- make interface IsVehicle and class GroundVehicle
 
 ## Lab2
 
