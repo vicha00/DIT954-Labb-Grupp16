@@ -7,7 +7,7 @@ public class Truck<T> extends GroundVehicle implements HasStorage<T> {
 
     public Truck(double enginePower, Color color, String modelName) {
         super(2, enginePower, color, modelName);
-        this.storage = new Trailer<>();
+        this.storage = new Trailer<>(10);
     }
 
     @Override

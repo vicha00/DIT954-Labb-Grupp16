@@ -1,7 +1,13 @@
+import java.sql.Array;
 import java.util.*;
 public abstract class Storage<T> implements HasStorage<T> {
 
+    protected final int max_capacity;
     private boolean storageOpen = false;
+
+    Storage(int max_capacity) {
+        this.max_capacity = max_capacity;
+    }
     protected List<T> storage = new ArrayList<>();
 
     @Override

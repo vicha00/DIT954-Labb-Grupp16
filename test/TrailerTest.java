@@ -11,7 +11,7 @@ public class TrailerTest {
 
     @Before
     public void init() {
-        trailer = new Trailer<>();
+        trailer = new Trailer<>(10);
     }
 
     @Test
@@ -42,5 +42,10 @@ public class TrailerTest {
             trailer.closeStorage();
             trailer.removeThing();
         });
+    }
+
+    @Test
+    public void maxCapacity() {
+
     }
 }

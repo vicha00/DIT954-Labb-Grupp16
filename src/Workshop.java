@@ -1,10 +1,7 @@
 public class Workshop<T extends IsVehicle> implements HasStorage<T> {
-
     private final Garage<T> garage;
-
-    private int max_things;
-    Workshop() {
-        garage = new Garage<>();
+    Workshop(int max_capacity) {
+        garage = new Garage<>(max_capacity);
     }
 
     @Override
