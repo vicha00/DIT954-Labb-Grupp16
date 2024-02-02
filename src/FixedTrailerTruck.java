@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.geom.Point2D;
 import java.util.*;
 
 public class FixedTrailerTruck<T> extends Vehicle implements HasStorage<T>{
