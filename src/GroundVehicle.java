@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class GroundVehicle implements IsVehicle {
+public abstract class GroundVehicle implements IsVehicle {
 
     private Point2D.Double position; // the position of the car
     private double directionAngle; // the current angle of the car in space
