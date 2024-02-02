@@ -1,8 +1,8 @@
 import java.awt.*;
 
+// only exist
 public class NormalCar extends GroundVehicle {
-
-    public NormalCar(double enginePower, Color color, String modelName) {
-        super(4, enginePower, color, modelName);
+    public NormalCar(int nrDoors, double enginePower, Color color, String modelName) {
+        super(nrDoors, enginePower, color, modelName);
     }
 }

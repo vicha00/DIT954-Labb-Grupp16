@@ -7,7 +7,7 @@ public class Volvo240 extends NormalCar {
 
 
     public Volvo240() {
-        super(4, Color.black, "Volvo240");
+        super(2,100, Color.black, "Volvo240");
     }
 
     @Override

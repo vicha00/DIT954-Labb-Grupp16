@@ -9,7 +9,7 @@ public class testMain {
         Saab95 saab = new Saab95();
 
         workshop.storeThing(saab);
-        volvo240Workshop.storeThing(saab);
+    //    volvo240Workshop.storeThing(saab);
         workshop.storeThing(volvo);
         volvo240Workshop.storeThing(volvo);
     }

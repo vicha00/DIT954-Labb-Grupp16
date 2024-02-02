@@ -1,10 +1,9 @@
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Stack;
 
 public class Storage<T> implements HasStorage<T> {
 
     private boolean storageOpen = false;
-    private final Deque<T> storage = new ArrayDeque<>();
+    private final Stack<T> storage = new Stack<>();
 
     @Override
     public void openStorage() {
@@ -33,16 +32,11 @@ public class Storage<T> implements HasStorage<T> {
         if (!storageOpen) {
             throw new IllegalAccessError("No Storage Access: open storag before removing things");
         }
-        return storage.pollLast();
+        return storage.pop();
     }
 
     @Override
     public int countThings() {
         return storage.size();
     }
-
-    public Deque<T> getStorage() {
-        return storage;
-    }
-
 }
