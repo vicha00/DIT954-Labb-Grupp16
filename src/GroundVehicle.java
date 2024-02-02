@@ -132,4 +132,10 @@ public class GroundVehicle implements IsVehicle {
         return new Point2D.Double(this.position.x, this.position.y);
     }
 
+    protected Point2D.Double getPositionRef() {return this.position;}
+
+    protected void setPosition(Point2D.Double p) {
+        this.position = p;
+    }
+
 }

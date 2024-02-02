@@ -1,9 +1,11 @@
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import
 
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 
 public class TruckTest {
 
@@ -16,5 +18,13 @@ public class TruckTest {
     @Test
     public void removeThingError() {
         assertThrows(IllegalAccessError.class, () -> {testTruck.removeThing();});
+    }
+
+    @Test
+    public void gasWhenStorageOpen() {
+        testTruck.openStorage();
+        testTruck.gas(1);
+        testTruck.move();
+        assertEquals(new Point2D.Double(0,0), testTruck.getPosition());
     }
 }

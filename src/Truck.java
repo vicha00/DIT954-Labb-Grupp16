@@ -12,11 +12,17 @@ public class Truck<T> extends GroundVehicle implements HasStorage<T> {
 
     @Override
     public void openStorage() {
+        if(Math.abs(getCurrentSpeed()) > 0.01) {
+            return;
+        }
         trailer.openStorage();
     }
 
     @Override
     public void closeStorage() {
+        if(Math.abs(getCurrentSpeed()) > 0.01) {
+            return;
+        }
         trailer.closeStorage();
     }
 
@@ -43,6 +49,14 @@ public class Truck<T> extends GroundVehicle implements HasStorage<T> {
     @Override
     public double speedFactor() {
         return super.speedFactor() * TOURQUE_FACTOR;
+    }
+
+    @Override
+    public void gas(double amount) {
+        if(trailer.isStorageOpen()) {
+            return;
+        }
+        super.gas(amount);
     }
 
 }
