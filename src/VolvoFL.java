@@ -10,7 +10,8 @@ public class VolvoFL extends Truck<NormalCar> {
 
 
     private boolean closeEnough(Point2D.Double p) {
-        return  1 >= p.distance(this.getPosition());
+        double dist = p.distance(this.getPosition());
+        return  1.0 >= dist;
     }
     @Override
     public void storeThing(NormalCar thing) {
