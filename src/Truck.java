@@ -3,47 +3,50 @@ import java.awt.Color;
 public class Truck<T> extends GroundVehicle implements HasStorage<T> {
 
     public static final double TOURQUE_FACTOR = 0.35;
-    private final Trailer<T> trailer;
+    private final Trailer<T> storage;
 
     public Truck(double enginePower, Color color, String modelName) {
         super(2, enginePower, color, modelName);
-        this.trailer = new Trailer<>();
+        this.storage = new Trailer<>();
     }
 
     @Override
     public void openStorage() {
-        if(Math.abs(getCurrentSpeed()) > 0.01) {
+        if (Math.abs(getCurrentSpeed()) > 0.01) {
             return;
         }
-        trailer.openStorage();
+        storage.openStorage();
     }
 
     @Override
     public void closeStorage() {
-        if(Math.abs(getCurrentSpeed()) > 0.01) {
+        if (Math.abs(getCurrentSpeed()) > 0.01) {
             return;
         }
-        trailer.closeStorage();
+        storage.closeStorage();
     }
 
     @Override
     public boolean isStorageOpen() {
-        return trailer.isStorageOpen();
+        return storage.isStorageOpen();
     }
 
     @Override
     public void storeThing(T toStore) {
-        trailer.storeThing(toStore);
+        storage.storeThing(toStore);
     }
 
     @Override
     public T removeThing() {
-        return trailer.removeThing();
+        if(!storage.isStorageOpen()) {
+            throw new IllegalAccessError("Cant remove a thing from a closed trailer");
+        }
+        return storage.removeThing();
     }
 
     @Override
     public int countThings() {
-        return trailer.countThings();
+        return storage.countThings();
     }
 
     @Override
@@ -53,7 +56,7 @@ public class Truck<T> extends GroundVehicle implements HasStorage<T> {
 
     @Override
     public void gas(double amount) {
-        if(trailer.isStorageOpen()) {
+        if (storage.isStorageOpen()) {
             return;
         }
         super.gas(amount);

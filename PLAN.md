@@ -21,7 +21,7 @@
 - make IsTruck interface with trailer methods for example: raiseTrailer, lowerTrailer, getTrailerAngle...
 - Implement IsTruck and add trailer methods and necessary variables to ScaniaTruck
 
-#### Trailer requirements
+#### Storage requirements
 
 - 0 <= angle <= 70 deg 
 - angle = 0 if truck is moving
@@ -43,7 +43,7 @@
 - incorporate into existing hierarchy
 - implement IsTruck and add trailer methods and variables
 
-#### Trailer requirements
+#### Storage requirements
 
 - CarTransport ramp has two modes and can be upp or down
 - ramp is up when CarTransport is moving

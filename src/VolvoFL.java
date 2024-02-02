@@ -15,7 +15,7 @@ public class VolvoFL extends Truck<NormalCar> {
     @Override
     public void storeThing(NormalCar thing) {
         boolean closeEnough = closeEnough(thing.getPosition());
-        if(countThings() >= MAX_LOAD && !closeEnough) {
+        if(countThings() >= MAX_LOAD || !closeEnough) {
             return;
         }
         thing.setPosition(getPositionRef());

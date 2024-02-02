@@ -7,39 +7,40 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TrailerTest {
-    Trailer<Integer> testTrailer;
+    Trailer<Integer> trailer;
 
     @Before
     public void init() {
-        testTrailer = new Trailer<>();
+        trailer = new Trailer<>();
     }
 
     @Test
     public void testStorageStatus() {
-        assertFalse(testTrailer.isStorageOpen());
-        testTrailer.openStorage();
-        assertTrue(testTrailer.isStorageOpen());
-        testTrailer.closeStorage();
-        assertFalse(testTrailer.isStorageOpen());
+        assertFalse(trailer.isStorageOpen());
+        trailer.openStorage();
+        assertTrue(trailer.isStorageOpen());
+        trailer.closeStorage();
+        assertFalse(trailer.isStorageOpen());
     }
 
     @Test
     public void testStorageFunctions() {
-        testTrailer.openStorage();
+        trailer.openStorage();
         Integer added = 1;
-        testTrailer.storeThing(added);
-        testTrailer.storeThing(2);
-        testTrailer.storeThing(3);
-        assertEquals(testTrailer.countThings(), 3);
-        Integer removed = testTrailer.removeThing();
+        trailer.storeThing(added);
+        trailer.storeThing(2);
+        trailer.storeThing(3);
+        assertEquals(trailer.countThings(), 3);
+        trailer.openStorage();
+        Integer removed = trailer.removeThing();
         assertEquals(3, (long) removed);
-        assertEquals(testTrailer.countThings(), 2);
-        assertEquals(testTrailer.removeThing(), (Integer) 2);
+        assertEquals(trailer.countThings(), 2);
+        assertEquals(trailer.removeThing(), (Integer) 2);
 
 
         assertThrows(IllegalAccessError.class, () -> {
-            testTrailer.closeStorage();
-            testTrailer.removeThing();
+            trailer.closeStorage();
+            trailer.removeThing();
         });
     }
 }
