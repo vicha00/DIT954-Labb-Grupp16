@@ -1,10 +1,10 @@
 import java.awt.Color;
 import java.util.*;
 
-public class FixedTrailerTruck<T> extends GroundVehicle implements HasStorage<T>{
+public class Truck<T> extends GroundVehicle implements HasStorage<T> {
     private final Storage<T> storage;
 
-    public FixedTrailerTruck(double enginePower, Color color, String modelName) {
+    public Truck(double enginePower, Color color, String modelName) {
         super(2, enginePower, color, modelName);
         this.storage = new Storage<>();
     }
@@ -36,9 +36,5 @@ public class FixedTrailerTruck<T> extends GroundVehicle implements HasStorage<T>
     @Override
     public int countThings() {
         return storage.countThings();
-    }
-
-    public void setSpeedFactor(double amount) {
-        super.setSpeedFactor(amount);
     }
 }

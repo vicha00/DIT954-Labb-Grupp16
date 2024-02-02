@@ -4,9 +4,9 @@ import java.awt.geom.Point2D;
 public class VolvoFL implements IsVehicle, HasStorage<NormalCar> {
 
     public static final double TOURQUE_FACTOR = 0.4;
-    private static FixedTrailerTruck<NormalCar> parent;
+    private static Truck<NormalCar> parent;
     public VolvoFL() {
-        parent = new FixedTrailerTruck<>(200,Color.BLUE,"VolvoFL");
+        parent = new Truck<>(200,Color.BLUE,"VolvoFL");
         parent.setSpeedFactor(parent.getEnginePower() * TOURQUE_FACTOR * 0.01);
     }
 

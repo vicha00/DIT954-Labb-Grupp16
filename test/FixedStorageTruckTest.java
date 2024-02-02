@@ -4,11 +4,11 @@ import static org.junit.Assert.*;
 
 public class FixedStorageTruckTest {
 
-    FixedTrailerTruck<NormalCar> testTruck;
+    Truck<NormalCar> testTruck;
     NormalCar dummy;
     @Before
     public void init() {
-        testTruck = new FixedTrailerTruck<>(200, Color.GREEN,"VolvoFL");
+        testTruck = new Truck<>(200, Color.GREEN,"VolvoFL");
         dummy = new NormalCar(0,Color.BLACK,"dummy");
     }
 
