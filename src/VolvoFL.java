@@ -2,10 +2,8 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 
 public class VolvoFL extends Truck<NormalCar> {
-
-    public static final int MAX_LOAD = 10;
     public VolvoFL() {
-        super(200, Color.BLUE, "VolvoFL");
+        super(200, Color.BLUE, "VolvoFL",10);
     }
 
 
@@ -16,7 +14,7 @@ public class VolvoFL extends Truck<NormalCar> {
     @Override
     public void storeThing(NormalCar thing) {
         boolean closeEnough = closeEnough(thing.getPosition());
-        if(countThings() >= MAX_LOAD || !closeEnough) {
+        if(!closeEnough) {
             return;
         }
         thing.setPosition(getPositionRef());
