@@ -34,13 +34,33 @@ public class vehicleControll extends Canvas {
     private class VehicleGraphicsRepresentation {
         Point centerPoint;
         Polygon carPolygon;
-        
+        GroundVehicle v;
 
         private VehicleGraphicsRepresentation(GroundVehicle v, int w, int l) {
+            this.v = v;
             centerPoint = new Point((int) v.getPosition().x, (int) v.getPosition().y);
-            /* carPolygon = genPoly(); // TODO rectangle pointing in direction of vehicle*/
+            carPolygon = genGVPoly( w, l); 
         }
         
+        private Polygon genGVPoly(int width, int length) {
+            double theta = v.getDirection();
+            double phi = Math.PI/2.0 -theta;
+            double[] l = {length*Math.cos(theta), length*Math.sin(theta)};
+            double[] w = {width*Math.cos(phi), width*Math.sin(phi)};
+            double x = (l[0] + w[0])/2.0;
+            double y = (l[1] + w[1])/2.0;
+            Point o = centerPoint;
+            int[] xPoints = {(int) (o.getX() - x), 
+                            (int) (o.getX() - x), 
+                            (int) (o.getX() + x ),
+                            (int) (o.getX() + x)};
+            int[] yPoints = {(int) (o.getY() - y),
+                            (int) (o.getY() + y),
+                            (int) (o.getY() + y),
+                            (int) (o.getY() - y)};
+            return new Polygon(xPoints, yPoints, 4);
+        }
+
         public VehicleGraphicsRepresentation(NormalCar car) {
             this(car, CAR_WIDTH, CAR_LENGTH);
 
@@ -50,6 +70,7 @@ public class vehicleControll extends Canvas {
         }
 
         public void draw(Graphics g) {
+            g.setColor(v.getColor());
             g.fillPolygon(carPolygon);
         }
 
