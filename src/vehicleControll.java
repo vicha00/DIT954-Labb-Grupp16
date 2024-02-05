@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JFrame;
+
 import java.awt.*;
 
-public class vehicleControll extends Canvas {
+public class VehicleControll extends Canvas {
     private final static int CAR_WIDTH = 5;
     private final static int CAR_LENGTH = 10;
     private final static int TRUCK_WIDTH = 7;
@@ -10,10 +13,10 @@ public class vehicleControll extends Canvas {
 
     private final List<NormalCar> cars;
     private final List<Truck<Cargo>> trucks;
-    private final List<VehicleGraphicsRepresentation>  vehicles;
-    private GroundVehicle selectedCar;
+    private final List<VehicleGraphicsRepresentation> vehicles;
+    private VehicleGraphicsRepresentation selectedVehicle;
 
-    vehicleControll(){
+    VehicleControll(){
         cars = new ArrayList<>();
         trucks = new ArrayList<>();
         vehicles = new ArrayList<>();
@@ -21,13 +24,31 @@ public class vehicleControll extends Canvas {
 
     public void paint(Graphics g) {
         setBackground(Color.LIGHT_GRAY);
-        for (NormalCar car : cars) {
-            new VehicleGraphicsRepresentation(car).draw(g);
-        }
-        for (Truck<Cargo> truck : trucks) {
-            new VehicleGraphicsRepresentation(truck).draw(g);
+        for (VehicleGraphicsRepresentation v : vehicles) {
+            if (v == selectedVehicle) {
+                v.drawSelectedVhicle(g);
+            }
+            else {
+                v.draw(g);
+            }
+            
         }
     }
+
+    public boolean addVehicle(Truck<Cargo> truck) {
+        trucks.add(truck);
+        return vehicles.add(new VehicleGraphicsRepresentation(truck));
+        
+    }
+    public boolean addVehicle(NormalCar car) {
+        cars.add(car);
+        return vehicles.add(new VehicleGraphicsRepresentation(car));
+    }
+
+
+    // public void selectVehicle()
+
+    
 
 
 
@@ -41,7 +62,7 @@ public class vehicleControll extends Canvas {
             centerPoint = new Point((int) v.getPosition().x, (int) v.getPosition().y);
             carPolygon = genGVPoly( w, l); 
         }
-        
+
         private Polygon genGVPoly(int width, int length) {
             double theta = v.getDirection();
             double phi = Math.PI/2.0 -theta;
@@ -73,6 +94,24 @@ public class vehicleControll extends Canvas {
             g.setColor(v.getColor());
             g.fillPolygon(carPolygon);
         }
+        
+        public void drawSelectedVhicle(Graphics g) {
+            draw(g);
+            g.setColor(Color.black);
+            g.drawPolygon(carPolygon);
+            g.setColor(Color.white);
+            g.fillOval(centerPoint.x, centerPoint.y, 1, 1 );
+        }
 
+    }
+
+
+    public static void main(String[] args) {
+        VehicleControll m=new VehicleControll();  
+        JFrame f=new JFrame();  
+        f.add(m);  
+        f.setSize(400,400);  
+          
+        f.setVisible(true); 
     }
 }
