@@ -13,17 +13,24 @@ public class VehicleControll extends Canvas implements KeyListener{
     private final static int TRUCK_WIDTH = 14;
     private final static int Truck_LENGTH = 40;
 
-    private final List<NormalCar> cars;
-    private final List<Truck<Cargo>> trucks;
-    private GroundVehicle selectedVehicle;
+    private final List<Tuple<GroundVehicle,VehicleGraphicsRepresentation>> vehicles;
+    private int selectedVehicleIndex;
+    private Tuple<GroundVehicle,VehicleGraphicsRepresentation> selectedVehicle;
 
-    private final List<VehicleGraphicsRepresentation> vehicles;
-    private VehicleGraphicsRepresentation selectedVehicleGraphics;
+
+    // private final List<NormalCar> cars;
+    // private final List<Truck<Cargo>> trucks;
+    // private final List<GroundVehicle> vehicles;
+    // private GroundVehicle selectedVehicle;
+
+    // private final List<VehicleGraphicsRepresentation> vehicleGraphics;
+    // private VehicleGraphicsRepresentation selectedVehicleGraphics;
 
     VehicleControll() {
-        cars = new ArrayList<>();
-        trucks = new ArrayList<>();
+        // cars = new ArrayList<>();
+        // trucks = new ArrayList<>();
         vehicles = new ArrayList<>();
+        // vehicleGraphics = new ArrayList<>();
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
@@ -31,27 +38,45 @@ public class VehicleControll extends Canvas implements KeyListener{
 
     public void paint(Graphics g) {
         setBackground(Color.LIGHT_GRAY);
-        for (VehicleGraphicsRepresentation v : vehicles) {
-            if (v == selectedVehicleGraphics) {
-                v.drawSelectedVhicle(g);
+        for (Tuple<GroundVehicle,VehicleGraphicsRepresentation> v : vehicles/* vehicleGraphics */) {
+            if (v.snd() == selectedVehicle.snd()) {
+                v.snd().drawSelectedVhicle(g);
             } else {
-                v.draw(g);
+                v.snd().draw(g);
             }
         }
     }
 
     public void addVehicle(Truck<Cargo> truck) {
-        trucks.add(truck);
-        vehicles.add(new VehicleGraphicsRepresentation(truck));
-        selectedVehicle = truck;
-        selectedVehicleGraphics = vehicles.getLast();
+        // trucks.add(truck);
+        VehicleGraphicsRepresentation vgrTruck = new VehicleGraphicsRepresentation(truck);
+        vehicles.add(new Tuple<GroundVehicle, VehicleGraphicsRepresentation>(truck,vgrTruck));
+
+        selectedVehicleIndex = vehicles.size()-1;
+        // vehicleGraphics.add(new VehicleGraphicsRepresentation(truck));
+        if (selectedVehicle != null) {
+            selectedVehicle.fst().stopEngine();
+        }
+        selectedVehicle = vehicles.get(selectedVehicleIndex);
+        // selectedVehicle = truck;
+        selectedVehicle.fst().startEngine();
+        // selectedVehicleGraphics = vehicleGraphics.getLast();
     }
 
     public void addVehicle(NormalCar car) {
-        cars.add(car);
-        vehicles.add(new VehicleGraphicsRepresentation(car));
-        selectedVehicle = car;
-        selectedVehicleGraphics = vehicles.getLast();
+        // cars.add(car);
+        VehicleGraphicsRepresentation vgrCar = new VehicleGraphicsRepresentation(car);
+        vehicles.add(new Tuple<GroundVehicle, VehicleGraphicsRepresentation>(car,vgrCar));
+
+        selectedVehicleIndex = vehicles.size()-1;
+        // vehicleGraphics.add(new VehicleGraphicsRepresentation(car));
+        if (selectedVehicle != null) {
+            selectedVehicle.fst().stopEngine();
+        }
+        // selectedVehicle = car;
+        selectedVehicle = vehicles.get(selectedVehicleIndex);
+        selectedVehicle.fst().startEngine();
+        // selectedVehicleGraphics = vehicleGraphics.getLast();
     }
 
     @Override
@@ -71,45 +96,62 @@ public class VehicleControll extends Canvas implements KeyListener{
             selectNexVehicle();
             break;
             case KeyEvent.VK_UP:
-            selectedVehicle.gas(0.5);
+            selectedVehicle.fst().gas(0.5);
             break;
             case KeyEvent.VK_LEFT:
-            selectedVehicle.turnLeft(Math.PI/10);
-            paint(this.getGraphics());
+            selectedVehicle.fst().turnLeft(Math.PI/10);
+            updateVisuals();
             break;
             case KeyEvent.VK_RIGHT:
-            selectedVehicle.turnRight(Math.PI/10);
-            paint(this.getGraphics());
+            selectedVehicle.fst().turnRight(Math.PI/10);
+            updateVisuals();
             break;
             case KeyEvent.VK_DOWN:
-            selectedVehicle.brake(0.5);
+            selectedVehicle.fst().brake(0.5);
             break;
             case KeyEvent.VK_SPACE:
-            selectedVehicle.move();
-            System.out.println(selectedVehicle.getCurrentSpeed());
-            paint(this.getGraphics());
+            selectedVehicle.fst().move();
+            updateVisuals();
+            System.out.println(selectedVehicle.fst().getCurrentSpeed());
             default:
                 break;
         }
     }
+    private void updateVisuals() {
+        Tuple<GroundVehicle,VehicleGraphicsRepresentation> tpl = new Tuple<>(selectedVehicle.fst(), selectedVehicle.snd().update());
+        vehicles.set(selectedVehicleIndex, tpl);
+        paint(this.getGraphics());
+    }
 
     private void selectNexVehicle() {
-        selectedVehicleGraphics = vehicles.get((vehicles.indexOf(selectedVehicleGraphics)+1) % vehicles.size());
+        selectedVehicle.fst().stopEngine();
+        selectedVehicle = vehicles.get((selectedVehicleIndex+1) % vehicles.size());
+        selectedVehicle.fst().startEngine();
+        // selectedVehicleGraphics = vehicleGraphics.get((vehicleGraphics.indexOf(selectedVehicleGraphics)+1) % vehicleGraphics.size());
         paint(this.getGraphics());
     }
 
     private class VehicleGraphicsRepresentation {
-        Point centerPoint;
-        Polygon carPolygon;
-        GroundVehicle v;
+        private Point centerPoint;
+        private Polygon carPolygon;
+        private final GroundVehicle v;
+        private final int width;
+        private final int length;
+
 
         private VehicleGraphicsRepresentation(GroundVehicle v, int w, int l) {
             this.v = v;
-            centerPoint = new Point((int) v.getPosition().x, (int) v.getPosition().y);
-            carPolygon = genGVPoly(w, l);
+            width = w;
+            length = l;
+            setCenterPoint();
+            carPolygon = genGVPoly();
         }
 
-        private Polygon genGVPoly(int width, int length) {
+        private void setCenterPoint() {
+            centerPoint = new Point((int) v.getPosition().x, (int) v.getPosition().y);
+        }
+
+        private Polygon genGVPoly() {
             double theta = v.getDirection();
             double phi = Math.PI / 2.0 - theta;
             double[] l = { length * Math.cos(theta), length * Math.sin(theta) };
@@ -130,7 +172,6 @@ public class VehicleControll extends Canvas implements KeyListener{
 
         public VehicleGraphicsRepresentation(NormalCar car) {
             this(car, CAR_WIDTH, CAR_LENGTH);
-
         }
 
         public VehicleGraphicsRepresentation(Truck<Cargo> truck) {
@@ -154,6 +195,23 @@ public class VehicleControll extends Canvas implements KeyListener{
             int[] ys = {p.ypoints[0] + 1, p.ypoints[1] - 1, p.ypoints[2] - 1, p.ypoints[3] + 1};
             return new Polygon(xs, ys, p.npoints);
         }
+
+        public VehicleGraphicsRepresentation update() {
+            setCenterPoint();
+            carPolygon = genGVPoly();
+            return this;
+        }
+    }
+
+    private class Tuple<A,B> {
+        private final A a;
+        private final B b;
+        Tuple(A a, B b) {
+            this.a = a;
+            this.b = b;
+        }
+        public A fst() {return a;}
+        public B snd() {return b;}
     }
 
     public static void main(String[] args) {
