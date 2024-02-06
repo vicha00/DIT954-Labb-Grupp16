@@ -4,12 +4,13 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 
 public class VehicleControll extends Canvas {
-    private final static int CAR_WIDTH = 5;
-    private final static int CAR_LENGTH = 10;
-    private final static int TRUCK_WIDTH = 7;
-    private final static int Truck_LENGTH = 20;
+    private final static int CAR_WIDTH = 50;
+    private final static int CAR_LENGTH = 100;
+    private final static int TRUCK_WIDTH = 70;
+    private final static int Truck_LENGTH = 200;
 
     private final List<NormalCar> cars;
     private final List<Truck<Cargo>> trucks;
@@ -35,21 +36,19 @@ public class VehicleControll extends Canvas {
         }
     }
 
-    public boolean addVehicle(Truck<Cargo> truck) {
+    public void addVehicle(Truck<Cargo> truck) {
         trucks.add(truck);
-        return vehicles.add(new VehicleGraphicsRepresentation(truck));
-        
+        vehicles.add(new VehicleGraphicsRepresentation(truck));
+        selectedVehicle = vehicles.getLast();
     }
-    public boolean addVehicle(NormalCar car) {
+    public void addVehicle(NormalCar car) {
         cars.add(car);
-        return vehicles.add(new VehicleGraphicsRepresentation(car));
+        vehicles.add(new VehicleGraphicsRepresentation(car));
+        selectedVehicle = vehicles.getLast();
     }
 
 
     // public void selectVehicle()
-
-    
-
 
 
     private class VehicleGraphicsRepresentation {
@@ -100,18 +99,31 @@ public class VehicleControll extends Canvas {
             g.setColor(Color.black);
             g.drawPolygon(carPolygon);
             g.setColor(Color.white);
-            g.fillOval(centerPoint.x, centerPoint.y, 1, 1 );
+            g.fillOval(centerPoint.x-5, centerPoint.y-5, 10, 10);
         }
 
     }
 
 
     public static void main(String[] args) {
-        VehicleControll m=new VehicleControll();  
+        VehicleControll m=new VehicleControll();
+
+        Volvo240 volvo1 = new Volvo240();
+        volvo1.setPosition(new Point2D.Double(75, 75));
+        m.addVehicle(volvo1);
+        
+        Saab95 saab1 = new Saab95();
+        saab1.setPosition(new Point2D.Double(325, 325));
+        m.addVehicle(saab1);
+        
+
+        ScaniaV8<Cargo> truck1 = new ScaniaV8<>();
+        truck1.setPosition(new Point2D.Double(200, 200));
+        m.addVehicle(truck1);
+
         JFrame f=new JFrame();  
         f.add(m);  
         f.setSize(400,400);  
-          
         f.setVisible(true); 
     }
 }
