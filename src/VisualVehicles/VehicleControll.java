@@ -3,24 +3,25 @@ import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.Point2D;
 
-public class VehicleControll extends JComponent implements KeyListener{
+public class VehicleControll extends JComponent implements KeyListener {
     private final static int CAR_WIDTH = 10;
     private final static int CAR_LENGTH = 20;
     private final static int TRUCK_WIDTH = 14;
     private final static int Truck_LENGTH = 40;
 
-    // private final List<Tuple<GroundVehicle,VehicleGraphicsRepresentation>> vehicles;
+    // private final List<Tuple<GroundVehicle,VehicleGraphicsRepresentation>>
+    // vehicles;
     private List<VehicleGraphicsRepresentation> vehicles;
     private int selectedVehicleIndex;
     // private Tuple<GroundVehicle,VehicleGraphicsRepresentation> selectedVehicle;
     private VehicleGraphicsRepresentation selectedVehicle;
     private JFrame f;
-
 
     // private final List<NormalCar> cars;
     // private final List<Truck<Cargo>> trucks;
@@ -54,7 +55,7 @@ public class VehicleControll extends JComponent implements KeyListener{
     }
 
     // public void addVehicle(Truck<Cargo> truck) {
-        public <T extends GroundVehicle> void addVehicle(Truck<Cargo> truck) {
+    public <T extends GroundVehicle> void addVehicle(Truck<Cargo> truck) {
         // trucks.add(truck);
         addVGR(new VehicleGraphicsRepresentation(truck));
     }
@@ -62,13 +63,15 @@ public class VehicleControll extends JComponent implements KeyListener{
     public void addVehicle(NormalCar car) {
         addVGR(new VehicleGraphicsRepresentation(car));
         // cars.add(car);
-        // VehicleGraphicsRepresentation vgrCar = new VehicleGraphicsRepresentation(car);
-        // vehicles.add(new Tuple<GroundVehicle, VehicleGraphicsRepresentation>(car,vgrCar));
+        // VehicleGraphicsRepresentation vgrCar = new
+        // VehicleGraphicsRepresentation(car);
+        // vehicles.add(new Tuple<GroundVehicle,
+        // VehicleGraphicsRepresentation>(car,vgrCar));
 
         // selectedVehicleIndex = vehicles.size()-1;
         // // vehicleGraphics.add(new VehicleGraphicsRepresentation(car));
         // if (selectedVehicle != null) {
-        //     selectedVehicle.fst().stopEngine();
+        // selectedVehicle.fst().stopEngine();
         // }
         // // selectedVehicle = car;
         // selectedVehicle = vehicles.get(selectedVehicleIndex);
@@ -79,7 +82,7 @@ public class VehicleControll extends JComponent implements KeyListener{
     private void addVGR(VehicleGraphicsRepresentation vgr) {
         vehicles.add(vgr);
 
-        selectedVehicleIndex = vehicles.size()-1;
+        selectedVehicleIndex = vehicles.size() - 1;
         // vehicleGraphics.add(new VehicleGraphicsRepresentation(truck));
         if (selectedVehicle != null) {
             selectedVehicle.getVehicle().stopEngine();
@@ -104,23 +107,23 @@ public class VehicleControll extends JComponent implements KeyListener{
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_TAB:
-            selectNexVehicle();
-            break;
+                selectNexVehicle();
+                break;
             case KeyEvent.VK_UP:
-            selectedVehicle.getVehicle().gas(0.5);
-            break;
+                selectedVehicle.getVehicle().gas(0.5);
+                break;
             case KeyEvent.VK_LEFT:
-            selectedVehicle.getVehicle().turnLeft(Math.PI/10);
-            break;
+                selectedVehicle.getVehicle().turnLeft(Math.PI / 10);
+                break;
             case KeyEvent.VK_RIGHT:
-            selectedVehicle.getVehicle().turnRight(Math.PI/10);
-            break;
+                selectedVehicle.getVehicle().turnRight(Math.PI / 10);
+                break;
             case KeyEvent.VK_DOWN:
-            selectedVehicle.getVehicle().brake(0.5);
-            break;
+                selectedVehicle.getVehicle().brake(0.5);
+                break;
             case KeyEvent.VK_SPACE:
-            selectedVehicle.getVehicle().move();
-            System.out.println(selectedVehicle.getVehicle().getCurrentSpeed());
+                selectedVehicle.getVehicle().move();
+                System.out.println(selectedVehicle.getVehicle().getCurrentSpeed());
             default:
                 break;
         }
@@ -134,13 +137,14 @@ public class VehicleControll extends JComponent implements KeyListener{
         f.repaint();
     }
 
-
     private void selectNexVehicle() {
         selectedVehicle.getVehicle().stopEngine();
         selectedVehicleIndex++;
         selectedVehicle = vehicles.get((selectedVehicleIndex) % vehicles.size());
         selectedVehicle.getVehicle().startEngine();
-        // selectedVehicleGraphics = vehicleGraphics.get((vehicleGraphics.indexOf(selectedVehicleGraphics)+1) % vehicleGraphics.size());
+        // selectedVehicleGraphics =
+        // vehicleGraphics.get((vehicleGraphics.indexOf(selectedVehicleGraphics)+1) %
+        // vehicleGraphics.size());
         f.repaint();
     }
 
@@ -150,7 +154,6 @@ public class VehicleControll extends JComponent implements KeyListener{
         private final GroundVehicle v;
         private final int width;
         private final int length;
-
 
         private VehicleGraphicsRepresentation(GroundVehicle v, int w, int l) {
             this.v = v;
@@ -191,7 +194,7 @@ public class VehicleControll extends JComponent implements KeyListener{
             this(truck, TRUCK_WIDTH, Truck_LENGTH);
         }
 
-        public GroundVehicle getVehicle(){
+        public GroundVehicle getVehicle() {
             return v;
         }
 
@@ -207,13 +210,14 @@ public class VehicleControll extends JComponent implements KeyListener{
             g.setColor(Color.white);
             g.fillOval(centerPoint.x - 2, centerPoint.y - 2, 4, 4);
         }
+
         private Polygon shrink(Polygon p) {
-            int[] xs = {p.xpoints[0] + 1, p.xpoints[1] + 1, p.xpoints[2] - 1, p.xpoints[3] - 1};
-            int[] ys = {p.ypoints[0] + 1, p.ypoints[1] - 1, p.ypoints[2] - 1, p.ypoints[3] + 1};
+            int[] xs = { p.xpoints[0] + 1, p.xpoints[1] + 1, p.xpoints[2] - 1, p.xpoints[3] - 1 };
+            int[] ys = { p.ypoints[0] + 1, p.ypoints[1] - 1, p.ypoints[2] - 1, p.ypoints[3] + 1 };
             return new Polygon(xs, ys, p.npoints);
         }
 
-        public void updateGraphics(){
+        public void updateGraphics() {
             setCenterPoint();
             carPolygon = genGVPoly();
         }
@@ -268,11 +272,10 @@ public class VehicleControll extends JComponent implements KeyListener{
             return VehicleControll.this;
         }
 
-        
     }
 
     public static void main(String[] args) {
-        
+
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(400, 400);
