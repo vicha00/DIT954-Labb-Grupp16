@@ -15,27 +15,13 @@ public class VehicleControll extends JComponent implements KeyListener {
     private final static int TRUCK_WIDTH = 14;
     private final static int Truck_LENGTH = 40;
 
-    // private final List<Tuple<GroundVehicle,VehicleGraphicsRepresentation>>
-    // vehicles;
     private List<VehicleGraphicsRepresentation> vehicles;
     private int selectedVehicleIndex;
-    // private Tuple<GroundVehicle,VehicleGraphicsRepresentation> selectedVehicle;
     private VehicleGraphicsRepresentation selectedVehicle;
     private JFrame f;
 
-    // private final List<NormalCar> cars;
-    // private final List<Truck<Cargo>> trucks;
-    // private final List<GroundVehicle> vehicles;
-    // private GroundVehicle selectedVehicle;
-
-    // private final List<VehicleGraphicsRepresentation> vehicleGraphics;
-    // private VehicleGraphicsRepresentation selectedVehicleGraphics;
-
     VehicleControll(JFrame f) {
-        // cars = new ArrayList<>();
-        // trucks = new ArrayList<>();
         vehicles = new ArrayList<>();
-        // vehicleGraphics = new ArrayList<>();
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
@@ -54,43 +40,23 @@ public class VehicleControll extends JComponent implements KeyListener {
         }
     }
 
-    // public void addVehicle(Truck<Cargo> truck) {
     public <T extends GroundVehicle> void addVehicle(Truck<Cargo> truck) {
-        // trucks.add(truck);
         addVGR(new VehicleGraphicsRepresentation(truck));
     }
 
     public void addVehicle(NormalCar car) {
         addVGR(new VehicleGraphicsRepresentation(car));
-        // cars.add(car);
-        // VehicleGraphicsRepresentation vgrCar = new
-        // VehicleGraphicsRepresentation(car);
-        // vehicles.add(new Tuple<GroundVehicle,
-        // VehicleGraphicsRepresentation>(car,vgrCar));
-
-        // selectedVehicleIndex = vehicles.size()-1;
-        // // vehicleGraphics.add(new VehicleGraphicsRepresentation(car));
-        // if (selectedVehicle != null) {
-        // selectedVehicle.fst().stopEngine();
-        // }
-        // // selectedVehicle = car;
-        // selectedVehicle = vehicles.get(selectedVehicleIndex);
-        // selectedVehicle.fst().startEngine();
-        // selectedVehicleGraphics = vehicleGraphics.getLast();
     }
 
     private void addVGR(VehicleGraphicsRepresentation vgr) {
         vehicles.add(vgr);
 
         selectedVehicleIndex = vehicles.size() - 1;
-        // vehicleGraphics.add(new VehicleGraphicsRepresentation(truck));
         if (selectedVehicle != null) {
             selectedVehicle.getVehicle().stopEngine();
         }
         selectedVehicle = vehicles.get(selectedVehicleIndex);
-        // selectedVehicle = truck;
         selectedVehicle.getVehicle().startEngine();
-        // selectedVehicleGraphics = vehicleGraphics.getLast();
     }
 
     @Override
@@ -100,11 +66,6 @@ public class VehicleControll extends JComponent implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("keyPressed: " + e.getKeyCode());
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_TAB:
                 selectNexVehicle();
@@ -122,12 +83,38 @@ public class VehicleControll extends JComponent implements KeyListener {
                 selectedVehicle.getVehicle().brake(0.5);
                 break;
             case KeyEvent.VK_SPACE:
-                selectedVehicle.getVehicle().move();
+                vehicles.forEach((VehicleGraphicsRepresentation v) -> {
+                    v.getVehicle().move();
+                        theWorldIsATorus(v.getVehicle());
+                });
                 System.out.println(selectedVehicle.getVehicle().getCurrentSpeed());
             default:
                 break;
         }
         updateVisualsAll();
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        System.out.println("keyPressed: " + e.getKeyCode());
+    }
+
+    private void theWorldIsATorus(GroundVehicle v) {
+        double x = v.getPosition().getX();
+        int w = f.getWidth();
+        double y = v.getPosition().getY();
+        int h = f.getHeight();
+        if (x < 0) {
+            x += w;
+        } else if (w < x) {
+            x -= w;
+        }
+        if (y < 0) {
+            y += h;
+        } else if (h < y) {
+            y -= h;
+        }
+        v.setPosition(new Point2D.Double(x, y));
     }
 
     private void updateVisualsAll() {
@@ -142,9 +129,6 @@ public class VehicleControll extends JComponent implements KeyListener {
         selectedVehicleIndex++;
         selectedVehicle = vehicles.get((selectedVehicleIndex) % vehicles.size());
         selectedVehicle.getVehicle().startEngine();
-        // selectedVehicleGraphics =
-        // vehicleGraphics.get((vehicleGraphics.indexOf(selectedVehicleGraphics)+1) %
-        // vehicleGraphics.size());
         f.repaint();
     }
 
@@ -294,8 +278,6 @@ public class VehicleControll extends JComponent implements KeyListener {
         truck1.setPosition(new Point2D.Double(200, 200));
         m.addVehicle(truck1);
 
-        // f.getContentPane().add(m);
-        // f.repaint();
         f.add(m);
         f.setVisible(true);
     }
