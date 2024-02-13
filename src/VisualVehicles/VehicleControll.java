@@ -9,6 +9,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.Point2D;
 
+/* ---------------------------------- WARNING ----------------------------------
+ *                          THIS CLASS IS AN ABOMINATION
+ * -------------------------------------------------------------------------- */
+
 public class VehicleControll extends JComponent implements KeyListener {
     private final static int CAR_WIDTH = 10;
     private final static int CAR_LENGTH = 20;
@@ -40,7 +44,7 @@ public class VehicleControll extends JComponent implements KeyListener {
         }
     }
 
-    public <T extends GroundVehicle> void addVehicle(Truck<Cargo> truck) {
+    public <T> void addVehicle(Truck<T> truck) {
         addVGR(new VehicleGraphicsRepresentation(truck));
     }
 
@@ -50,13 +54,20 @@ public class VehicleControll extends JComponent implements KeyListener {
 
     private void addVGR(VehicleGraphicsRepresentation vgr) {
         vehicles.add(vgr);
+        selectAddedVehicle();
+    }
 
+    private void selectAddedVehicle() {
+        stopEngineOfPrevSelectedVehicle();
         selectedVehicleIndex = vehicles.size() - 1;
+        selectedVehicle = vehicles.get(selectedVehicleIndex);
+        selectedVehicle.getVehicle().startEngine();
+    }
+
+    private void stopEngineOfPrevSelectedVehicle() {
         if (selectedVehicle != null) {
             selectedVehicle.getVehicle().stopEngine();
         }
-        selectedVehicle = vehicles.get(selectedVehicleIndex);
-        selectedVehicle.getVehicle().startEngine();
     }
 
     @Override
@@ -71,32 +82,68 @@ public class VehicleControll extends JComponent implements KeyListener {
                 selectNexVehicle();
                 break;
             case KeyEvent.VK_UP:
-                selectedVehicle.getVehicle().gas(0.5);
+                gasSelectedVehicle();
                 break;
             case KeyEvent.VK_LEFT:
-                selectedVehicle.getVehicle().turnLeft(Math.PI / 10);
+                turnSelectedVehicleLeft();
                 break;
             case KeyEvent.VK_RIGHT:
-                selectedVehicle.getVehicle().turnRight(Math.PI / 10);
+                turnSelectedVehicleRigth();
                 break;
             case KeyEvent.VK_DOWN:
-                selectedVehicle.getVehicle().brake(0.5);
+                brakeSelectedVehicle();
                 break;
             case KeyEvent.VK_SPACE:
-                vehicles.forEach((VehicleGraphicsRepresentation v) -> {
-                    v.getVehicle().move();
-                        theWorldIsATorus(v.getVehicle());
-                });
-                System.out.println(selectedVehicle.getVehicle().getCurrentSpeed());
+                moveAllVehicles();
             default:
                 break;
         }
         updateVisualsAll();
     }
 
+    private void moveAllVehicles() {
+        vehicles.forEach((VehicleGraphicsRepresentation v) -> {
+            v.getVehicle().move();
+            // theWorldIsATorus(v.getVehicle());
+            theWorldHasBouncyWalls(v.getVehicle());
+        });
+        System.out.println(selectedVehicle.getVehicle().getCurrentSpeed());
+    }
+
+    private void brakeSelectedVehicle() {
+        selectedVehicle.getVehicle().brake(0.5);
+    }
+
+    private void turnSelectedVehicleRigth() {
+        selectedVehicle.getVehicle().turnRight(Math.PI / 10);
+    }
+
+    private void turnSelectedVehicleLeft() {
+        selectedVehicle.getVehicle().turnLeft(Math.PI / 10);
+    }
+
+    private void gasSelectedVehicle() {
+        selectedVehicle.getVehicle().gas(0.5);
+    }
+
     @Override
     public void keyReleased(KeyEvent e) {
         System.out.println("keyPressed: " + e.getKeyCode());
+    }
+
+
+    private void theWorldHasBouncyWalls(GroundVehicle v) {
+        if (isOutOfBounds(v)) {
+            v.turnLeft(Math.PI);
+        }
+    }
+
+    private boolean isOutOfBounds(GroundVehicle v){
+        double x = v.getPosition().getX();
+        int w = f.getWidth();
+        double y = v.getPosition().getY();
+        int h = f.getHeight();
+        return x <= 0 || w <= x || y <= 0 || h <= y;
     }
 
     private void theWorldIsATorus(GroundVehicle v) {
@@ -153,8 +200,9 @@ public class VehicleControll extends JComponent implements KeyListener {
 
         private Polygon genGVPoly() {
             double theta = v.getDirection();
-            double phi = Math.PI / 2.0 - theta;
             double[] l = { length * Math.cos(theta), length * Math.sin(theta) };
+            // double[] w = { width * Math.cos(theta), width * Math.sin(theta) };
+            double phi = Math.PI / 2.0 - theta;
             double[] w = { width * Math.cos(phi), width * Math.sin(phi) };
             double x = (l[0] + w[0]) / 2.0;
             double y = (l[1] + w[1]) / 2.0;
@@ -174,10 +222,10 @@ public class VehicleControll extends JComponent implements KeyListener {
             this(car, CAR_WIDTH, CAR_LENGTH);
         }
 
-        public VehicleGraphicsRepresentation(Truck<Cargo> truck) {
+        public <T> VehicleGraphicsRepresentation(Truck<T> truck) {
             this(truck, TRUCK_WIDTH, Truck_LENGTH);
         }
-
+        
         public GroundVehicle getVehicle() {
             return v;
         }
@@ -259,10 +307,9 @@ public class VehicleControll extends JComponent implements KeyListener {
     }
 
     public static void main(String[] args) {
-
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setSize(400, 400);
+        f.setSize(800, 400);
 
         VehicleControll m = new VehicleControll(f);
 
@@ -277,6 +324,11 @@ public class VehicleControll extends JComponent implements KeyListener {
         ScaniaV8<Cargo> truck1 = new ScaniaV8<>();
         truck1.setPosition(new Point2D.Double(200, 200));
         m.addVehicle(truck1);
+
+        
+        VolvoFL truck2 = new VolvoFL();
+        truck2.setPosition(new Point2D.Double(500, 250));
+        m.addVehicle(truck2);
 
         f.add(m);
         f.setVisible(true);
